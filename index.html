@@ -236,6 +236,42 @@
   .mid{display:flex;justify-content:center;align-items:center;gap:10px;padding:6px;background:#2B2A4C}
   .mid button{border:0;border-radius:12px;font-family:inherit;font-weight:800;font-size:16px;padding:6px 14px;background:#fff;color:var(--ink)}
   .bigmsg{font-size:clamp(34px,9vw,52px);font-weight:800;text-align:center}
+  /* ===== ROBOT ===== */
+  .rboard{display:flex;align-items:center;justify-content:space-between;gap:8px;font-weight:800}
+  .rboard .side{display:flex;flex-direction:column;align-items:center;gap:4px;min-width:96px}
+  .rboard .pts{font-size:34px;line-height:1}
+  .rboard .nm{font-size:17px}
+  .rpips{display:flex;gap:3px;flex-wrap:wrap;justify-content:center;max-width:110px}.rpips i{width:9px;height:9px;border-radius:50%;background:#0001}
+  .me .rpips i.on{background:var(--c6)} .bot .rpips i.on{background:var(--c7)}
+  .rstage{position:relative;display:flex;flex-direction:column;align-items:center}
+  .bubble{position:relative;background:#fff;border:3px solid #2B2A4C;border-radius:18px;padding:4px 12px;font-weight:800;font-size:17px;min-height:34px;margin-bottom:4px}
+  .bubble:after{content:'';position:absolute;left:50%;bottom:-10px;margin-left:-8px;border:8px solid transparent;border-top-color:#2B2A4C;border-bottom:0}
+  .robot{width:150px;height:165px;animation:bob 2.2s ease-in-out infinite;transform-origin:50% 100%}
+  @keyframes bob{50%{transform:translateY(-6px)}}
+  .robot .bulb{animation:glow 1.4s infinite}
+  @keyframes glow{50%{fill:#FFF3A3}}
+  .robot .eyes{animation:blink 4s infinite;transform-origin:100px 78px}
+  @keyframes blink{0%,92%,100%{transform:scaleY(1)}95%{transform:scaleY(.1)}}
+  .robot .armL{transform-origin:52px 140px;animation:wave 2.2s ease-in-out infinite}
+  .robot .armR{transform-origin:148px 140px;animation:wave 2.2s ease-in-out infinite reverse}
+  @keyframes wave{50%{transform:rotate(-12deg)}}
+  .robot.thinking .pupils{animation:look .8s ease-in-out infinite alternate}
+  @keyframes look{from{transform:translateX(-5px)}to{transform:translateX(5px)}}
+  .robot.thinking .bulb{animation:glow .35s infinite}
+  .robot.thinking .gear{animation:spin 1s linear infinite;transform-origin:100px 160px}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .robot.happy{animation:jump .5s ease-in-out 2}
+  @keyframes jump{50%{transform:translateY(-22px) rotate(-4deg)}}
+  .robot.happy .armL,.robot.happy .armR{animation:wave .25s infinite}
+  .robot.sad{animation:none;transform:rotate(6deg) translateY(4px)}
+  .robot.sad .bulb{animation:none;fill:#999}
+  .robot.oops{animation:shake .4s 2}
+  .rtimer{width:160px;height:12px;background:#0000000f;border-radius:999px;overflow:hidden;margin-top:4px}
+  .rtimer i{display:block;height:100%;width:0;background:var(--c7);border-radius:999px}
+  .rq{font-size:clamp(40px,11vw,60px);font-weight:800;margin:6px 0 2px}
+  .lvls{display:flex;flex-direction:column;gap:12px;align-items:center;margin-top:10px}
+  .lvls button{width:min(320px,100%);border:0;border-radius:18px;font-family:inherit;font-weight:800;font-size:21px;padding:12px;cursor:pointer;color:#fff;box-shadow:0 5px 0 #0003;text-align:left}
+  .lvls button small{display:block;font-size:14px;opacity:.9;font-weight:700}
 </style>
 </head>
 <body>
@@ -874,11 +910,69 @@ const duelo={t:'Papá vs. hija 🏁',start(){gStop();gScore('');
       else{b.classList.add('bad');beep(false);h.classList.add('frozen');gt(()=>h.classList.remove('frozen'),1000)}}))},
   win(p){this.over=true;[1,2].forEach(k=>{const h=$('h'+k);h.querySelector('.dq').innerHTML=`<div class="bigmsg">${k===p?'¡Ganaste! 🏆':'¡Casi! 💪'}</div>`;h.querySelector('.dch').innerHTML=''});confetti()}};
 
-const GAMES={tienda:{...tienda,ico:'🛒',s:'Paga y calcula el cambio',c:'--c3'},memo:{...memo,ico:'🃏',s:'Encuentra las parejas',c:'--c4'},globos:{...globos,ico:'🎈',s:'Revienta la respuesta',c:'--c7'},
+/* ---- 6. TÚ VS ROBOT ---- */
+const MOUTH={idle:'M84 98 Q100 110 116 98',think:'M88 102 L112 102',happy:'M80 94 Q100 120 120 94 Z',sad:'M84 106 Q100 94 116 106',oops:'M90 100 Q100 110 110 100 Q100 92 90 100'};
+function robotSVG(){return `<svg class="robot" id="robo" viewBox="0 0 200 220" aria-label="Robot">
+  <line x1="100" y1="12" x2="100" y2="36" stroke="#5A5F8A" stroke-width="5" stroke-linecap="round"/>
+  <circle class="bulb" cx="100" cy="12" r="9" fill="#FFB703" stroke="#5A5F8A" stroke-width="3"/>
+  <rect x="30" y="58" width="14" height="36" rx="6" fill="#8E9BEA"/><rect x="156" y="58" width="14" height="36" rx="6" fill="#8E9BEA"/>
+  <rect x="42" y="34" width="116" height="92" rx="30" fill="#B9C6FF" stroke="#5A5F8A" stroke-width="4"/>
+  <rect x="54" y="48" width="92" height="62" rx="22" fill="#2B2A4C"/>
+  <g class="eyes"><circle cx="80" cy="76" r="13" fill="#7DF9FF"/><circle cx="120" cy="76" r="13" fill="#7DF9FF"/>
+   <g class="pupils"><circle cx="80" cy="77" r="6" fill="#2B2A4C"/><circle cx="120" cy="77" r="6" fill="#2B2A4C"/><circle cx="82" cy="74" r="2" fill="#fff"/><circle cx="122" cy="74" r="2" fill="#fff"/></g></g>
+  <circle cx="64" cy="98" r="6" fill="#FF8FB8" opacity=".8"/><circle cx="136" cy="98" r="6" fill="#FF8FB8" opacity=".8"/>
+  <path id="mouth" d="${MOUTH.idle}" stroke="#7DF9FF" stroke-width="4" fill="#7DF9FF" fill-opacity="0" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="88" y="124" width="24" height="10" fill="#8E9BEA"/>
+  <g class="armL"><rect x="26" y="136" width="30" height="12" rx="6" fill="#8E9BEA" stroke="#5A5F8A" stroke-width="3"/><circle cx="24" cy="142" r="9" fill="#FFB703" stroke="#5A5F8A" stroke-width="3"/></g>
+  <g class="armR"><rect x="144" y="136" width="30" height="12" rx="6" fill="#8E9BEA" stroke="#5A5F8A" stroke-width="3"/><circle cx="176" cy="142" r="9" fill="#FFB703" stroke="#5A5F8A" stroke-width="3"/></g>
+  <rect x="52" y="132" width="96" height="64" rx="20" fill="#B9C6FF" stroke="#5A5F8A" stroke-width="4"/>
+  <g class="gear"><circle cx="100" cy="160" r="14" fill="#FFB703" stroke="#5A5F8A" stroke-width="3"/><circle cx="100" cy="160" r="5" fill="#5A5F8A"/>
+   <rect x="97" y="141" width="6" height="8" fill="#5A5F8A"/><rect x="97" y="171" width="6" height="8" fill="#5A5F8A"/><rect x="81" y="157" width="8" height="6" fill="#5A5F8A"/><rect x="111" y="157" width="8" height="6" fill="#5A5F8A"/></g>
+  <circle cx="68" cy="184" r="4" fill="#F15BB5"/><circle cx="132" cy="184" r="4" fill="#2EC4B6"/>
+  <rect x="62" y="196" width="28" height="16" rx="8" fill="#5A5F8A"/><rect x="110" y="196" width="28" height="16" rx="8" fill="#5A5F8A"/></svg>`}
+function roboFace(st){const r=$('robo');if(!r)return;r.classList.remove('thinking','happy','sad','oops');if(st!=='idle')r.classList.add(st);
+  const m=$('mouth');m.setAttribute('d',MOUTH[{thinking:'think',happy:'happy',sad:'sad',oops:'oops'}[st]||'idle']);m.setAttribute('fill-opacity',st==='happy'?'1':'0')}
+function roboOp(){const t=R(0,2);
+  if(t===0){const a=R(2,10),b=R(1,10);return{q:`${a} × ${b}`,a:a*b}}
+  if(t===1){const a=R(12,79),b=R(5,99-a);return{q:`${a} + ${b}`,a:a+b}}
+  const a=R(20,99),b=R(5,a-1);return{q:`${a} − ${b}`,a:a-b}}
+const ROBOLV={dormilon:{n:'😴 Robot dormilón',s:6,err:.15,c:'#2EC4B6'},normal:{n:'🤖 Robot normal',s:4,err:.1,c:'#6C63FF'},turbo:{n:'⚡ Robot turbo',s:2.5,err:.06,c:'#F15BB5'}};
+const robot={t:'Tú vs. Robot 🤖',start(){gStop();gScore('');
+    gB().innerHTML=`<div class="gcard"><div class="rstage"><div class="bubble">¡Hola! ¿Me ganas? 😎</div>${robotSVG()}</div>
+     <div class="gq">Contesta antes que el robot. ¡Gana el primero en llegar a <b>10</b>!</div>
+     <div class="lvls">${Object.entries(ROBOLV).map(([k,l])=>`<button data-l="${k}" style="background:${l.c}">${l.n}<small>Contesta en ${String(l.s).replace('.',',')} segundos${best['g_robot_'+k]?' · '+'⭐'.repeat(best['g_robot_'+k]):''}</small></button>`).join('')}</div></div>`;
+    gB().querySelectorAll('[data-l]').forEach(b=>b.onclick=()=>this.go(b.dataset.l))},
+  go(lv){gStop();this.lv=lv;this.L=ROBOLV[lv];this.sc=[0,0];this.over=false;gScore(this.L.n);
+    gB().innerHTML=`<div class="gcard"><div class="rboard"><div class="side me"><div class="nm">⭐ Tú</div><div class="pts" id="rp0">0</div><div class="rpips" id="rpp0">${'<i></i>'.repeat(10)}</div></div>
+      <div class="rstage"><div class="bubble" id="rbub">¿Lista? 😃</div>${robotSVG()}<div class="rtimer"><i id="rtb"></i></div></div>
+      <div class="side bot"><div class="nm">🤖 Robot</div><div class="pts" id="rp1">0</div><div class="rpips" id="rpp1">${'<i></i>'.repeat(10)}</div></div></div>
+      <div class="rq" id="rq">3</div><div class="choices" id="rch" style="margin-top:8px"></div><div class="fb" id="tfb"></div></div>`;
+    let c=3;const cd=()=>{$('rq').textContent=c||'¡Ya!';if(c--<=0)gt(()=>this.q(),500);else gt(cd,750)};cd()},
+  pt(w,msg){this.sc[w]++;$('rp'+w).textContent=this.sc[w];$('rpp'+w).querySelectorAll('i').forEach((x,i)=>x.classList.toggle('on',i<this.sc[w]));
+    $('rbub').textContent=msg;if(this.sc[w]>=10){this.over=true;gt(()=>this.end(),1200)}else gt(()=>this.q(),1300)},
+  q(){if(this.over)return;if(gRaf)cancelAnimationFrame(gRaf);this.done=false;const o=roboOp();this.o=o;$('rq').textContent=o.q;$('tfb').textContent='';
+    roboFace('thinking');$('rbub').textContent=pick(['Mmm… 🤔','Calculando…','Déjame pensar…','Bip bup… 🔢']);
+    const ch=shuffle([o.a,...distract(o.a,3)]);$('rch').innerHTML=ch.map(v=>`<button data-v="${v}">${v}</button>`).join('');
+    $('rch').querySelectorAll('button').forEach(b=>b.addEventListener('pointerdown',e=>{e.preventDefault();if(this.done||b.disabled)return;
+      if(Number(b.dataset.v)===o.a){this.done=true;b.classList.add('ok');beep(true);roboFace('sad');$('tfb').innerHTML=`<span style="color:var(--ok)">${pick(['¡Punto para ti! ⭐','¡Más rápida que el robot! ⚡','¡Le ganaste! 🎉'])}</span>`;
+        if(gRaf)cancelAnimationFrame(gRaf);this.pt(0,pick(['¡Qué rápida! 😮','¡Nooo! 😵','¡Me ganaste! 🙈','Eres muy buena 👏']))}
+      else{b.classList.add('bad');b.disabled=true;beep(false);$('tfb').innerHTML='<span style="color:var(--bad)">¡Esa no! Rápido, otra 💨</span>'}}));
+    const t0=performance.now(),dur=this.L.s*1000;const loop=now=>{const p=Math.min(1,(now-t0)/dur);$('rtb').style.width=(p*100)+'%';
+      if(p>=1){gRaf=null;this.botAnswer();return}gRaf=requestAnimationFrame(loop)};gRaf=requestAnimationFrame(loop)},
+  botAnswer(){if(this.done||this.over)return;this.done=true;const o=this.o;const btns=[...$('rch').querySelectorAll('button')];
+    if(Math.random()<this.L.err){const w=btns.find(b=>Number(b.dataset.v)!==o.a&&!b.disabled);if(w)w.classList.add('bad');roboFace('oops');beep(true);
+      $('tfb').innerHTML=`<span style="color:var(--ok)">¡El robot se equivocó! Era ${o.a}. Punto para ti ⭐</span>`;btns.find(b=>Number(b.dataset.v)===o.a).classList.add('ok');this.pt(0,'¡Ups! Me equivoqué 🤖💥');return}
+    btns.find(b=>Number(b.dataset.v)===o.a).classList.add('ok');roboFace('happy');beep(false);$('tfb').innerHTML=`<span style="color:var(--bad)">El robot contestó primero: ${o.q} = ${o.a}</span>`;
+    this.pt(1,pick(['¡Te gané! 😎','¡Bip! Punto para mí 🤖','¡Soy rapidísimo! ⚡','¡Ja! 😜']))},
+  end(){const win=this.sc[0]>=10;const st=win?(this.sc[1]<=3?3:this.sc[1]<=6?2:1):0;const key='g_robot_'+this.lv;
+    gEnd({emoji:win?'🏆':'🤖',title:win?'¡Le ganaste al robot!':'¡El robot ganó esta vez!',sub:`Tú ${this.sc[0]} – ${this.sc[1]} Robot · ${this.L.n}${win&&this.lv!=='turbo'?'<br>¿Te atreves con el siguiente nivel? 💪':''}`,stars:win?st:undefined,key,again:()=>this.go(this.lv)});
+    const g=document.querySelector('#gBody .gcard');if(g)g.insertAdjacentHTML('afterbegin',`<div style="display:flex;justify-content:center">${robotSVG()}</div>`);roboFace(win?'sad':'happy');
+    const bt=$('gAgain');bt.insertAdjacentHTML('afterend','<button class="btn" id="gLv" style="background:var(--c6);box-shadow:0 5px 0 #a83d80">Cambiar nivel</button>');$('gLv').onclick=()=>this.start()}};
+const GAMES={robot:{...robot,ico:'🤖',s:'¡Gánale al robot!',c:'--c5'},tienda:{...tienda,ico:'🛒',s:'Paga y calcula el cambio',c:'--c3'},memo:{...memo,ico:'🃏',s:'Encuentra las parejas',c:'--c4'},globos:{...globos,ico:'🎈',s:'Revienta la respuesta',c:'--c7'},
   miste:{...miste,ico:'🕵️',s:'Adivina con pistas',c:'--c6'},duelo:{...duelo,ico:'🏁',s:'2 jugadores',c:'--c1'}};
-const GTITLE={tienda:'La tiendita',memo:'Memorama de tablas',globos:'Lluvia de globos',miste:'El número misterioso',duelo:'Papá vs. hija'};
+const GTITLE={robot:'Tú vs. Robot',tienda:'La tiendita',memo:'Memorama de tablas',globos:'Lluvia de globos',miste:'El número misterioso',duelo:'Papá vs. hija'};
 function renderGames(){$('gamesGrid').innerHTML=Object.entries(GAMES).map(([k,g])=>{const b=best['g_'+k]||0;
-  const extra=k==='globos'&&rec.globos?`Récord: ${rec.globos}`:k==='memo'&&rec.memo?`Récord: ${rec.memo} intentos`:k==='duelo'?'':(b?'⭐'.repeat(b)+'☆'.repeat(3-b):'☆☆☆');
+  const rb=Math.max(0,...['dormilon','normal','turbo'].map(x=>best['g_robot_'+x]||0));const extra=k==='robot'?'⭐'.repeat(rb)+'☆'.repeat(3-rb):k==='globos'&&rec.globos?`Récord: ${rec.globos}`:k==='memo'&&rec.memo?`Récord: ${rec.memo} intentos`:k==='duelo'?'':(b?'⭐'.repeat(b)+'☆'.repeat(3-b):'☆☆☆');
   return `<button class="tile gtile" style="background:var(${g.c})" data-g="${k}"><div class="ico">${g.ico}</div><div><div class="t">${GTITLE[k]}</div><div class="s">${g.s}</div><div class="best">${extra}</div></div></button>`}).join('');
   document.querySelectorAll('[data-g]').forEach(b=>b.onclick=()=>{const g=GAMES[b.dataset.g];gStop();$('gTitle').textContent=g.t;show('game');g.start()})}
 const _rm=renderMenu;renderMenu=function(){_rm();renderGames()};
