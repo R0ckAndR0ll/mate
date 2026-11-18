@@ -173,6 +173,69 @@
   .goal{margin-top:10px;font-size:20px;font-weight:800}
   .goal.done{color:var(--ok)}
   .goal button{border:0;border-radius:14px;background:var(--c6);color:#fff;font-family:inherit;font-weight:800;font-size:17px;padding:6px 14px;margin-left:6px;cursor:pointer}
+  /* ===== JUEGOS ===== */
+  .gtile{min-height:110px}
+  #game .lhead .stars{font-size:17px}
+  .gcard{background:var(--card);border-radius:28px;padding:18px 14px;box-shadow:0 8px 0 #00000012;text-align:center}
+  .gq{font-size:clamp(20px,5vw,27px);font-weight:700;line-height:1.25;margin:6px 0}
+  .prod{font-size:64px;line-height:1}
+  .price{display:inline-block;background:#FFF0C2;color:#8a5d00;border-radius:14px;padding:2px 14px;font-size:30px;font-weight:800;margin-top:4px}
+  .wallet{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:12px}
+  .wallet .money{cursor:pointer;touch-action:manipulation}
+  .wallet .money:active{transform:scale(.92)}
+  .paid{min-height:58px;margin:10px auto 0;padding:8px;border:3px dashed #CFCBE8;border-radius:16px;display:flex;flex-wrap:wrap;gap:4px;justify-content:center;align-items:center;background:#FBFAFF}
+  .paid .money{transform:scale(.7);margin:-8px -10px}
+  .ptotal{font-size:24px;font-weight:800;margin-top:6px}
+  .grow2{display:flex;gap:10px;justify-content:center;margin-top:12px;flex-wrap:wrap}
+  .sbtn{border:0;border-radius:16px;font-family:inherit;font-weight:800;font-size:20px;padding:10px 18px;cursor:pointer;color:#fff;background:var(--c4);box-shadow:0 5px 0 #4b43c9}
+  .sbtn.gray{background:#EEF0FF;color:var(--ink);box-shadow:0 5px 0 #C9CCEB}
+  .sbtn.green{background:var(--ok);box-shadow:0 5px 0 #1e8a56}
+  .sbtn.red{background:var(--bad);box-shadow:0 5px 0 #a82b2f}
+  .basket{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .basket div{display:flex;flex-direction:column;align-items:center;font-weight:800;font-size:20px}
+  .basket .e{font-size:50px;line-height:1}
+  /* memorama */
+  .mgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:420px;margin:10px auto 0}
+  .mc{aspect-ratio:1/1;border:0;border-radius:18px;font-family:inherit;font-weight:800;font-size:clamp(24px,7vw,34px);cursor:pointer;color:#fff;
+     background:linear-gradient(135deg,#6C63FF,#F15BB5);box-shadow:0 5px 0 #0002;touch-action:manipulation}
+  .mc.up{background:#fff;color:var(--ink);border:4px solid #CFCBE8;animation:pop .25s}
+  .mc.up.op{color:#5A52E0}.mc.up.res{color:#1E9E95}
+  .mc.done{background:#E8F8EF;border:4px solid var(--ok);color:var(--ok);transform:scale(.94)}
+  .minfo{display:flex;justify-content:space-around;font-weight:800;font-size:19px}
+  /* globos */
+  .gtop{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}
+  .gop{flex:1;background:var(--card);border-radius:18px;padding:4px 10px;font-size:clamp(30px,8vw,42px);font-weight:800;text-align:center;box-shadow:0 4px 0 #0001}
+  .lives{font-size:24px;white-space:nowrap}
+  .sky{position:relative;height:calc(100vh - 210px);min-height:380px;max-height:640px;border-radius:26px;overflow:hidden;
+     background:linear-gradient(#8FD3FF,#D9F1FF 70%,#B6E8B0 70.5%,#8ACB7E);touch-action:manipulation}
+  .cloud{position:absolute;background:#fff;border-radius:999px;opacity:.85}
+  .bal{position:absolute;width:78px;height:96px;margin-left:-39px;cursor:pointer;touch-action:manipulation}
+  .bal .b{width:78px;height:88px;border-radius:50% 50% 48% 48%/55% 55% 45% 45%;display:flex;align-items:center;justify-content:center;
+     color:#fff;font-weight:800;font-size:28px;box-shadow:inset -8px -10px 0 #0002;text-shadow:0 2px 0 #0003}
+  .bal .s{width:2px;height:40px;background:#5558;margin:0 auto}
+  .bal.gone{opacity:.25;filter:grayscale(1);pointer-events:none}
+  .bal.popped{animation:popb .25s forwards}
+  @keyframes popb{to{transform:scale(1.8);opacity:0}}
+  .gmsg{position:absolute;left:0;right:0;top:40%;text-align:center;font-size:32px;font-weight:800;color:#2B2A4C;pointer-events:none}
+  /* misterioso */
+  .clues{display:flex;flex-direction:column;gap:8px;text-align:left;margin:10px 0}
+  .clue{background:#F4F1FF;border-radius:14px;padding:8px 12px;font-size:clamp(18px,4.6vw,22px);font-weight:700}
+  .clue:before{content:'🔍 '}
+  /* duelo */
+  .duel{position:fixed;inset:0;z-index:5;display:flex;flex-direction:column;background:var(--bg)}
+  .half{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:10px 14px;gap:8px}
+  .half.p1{transform:rotate(180deg);background:#FFE7E7}
+  .half.p2{background:#E3F2FF}
+  .half .who{font-weight:800;font-size:18px}
+  .half .dq{font-size:clamp(36px,10vw,56px);font-weight:800;line-height:1}
+  .half .dch{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;width:100%;max-width:420px}
+  .half .dch button{border:0;border-radius:16px;font-family:inherit;font-weight:800;font-size:30px;padding:10px 0;background:#fff;color:var(--ink);box-shadow:0 5px 0 #0002;touch-action:manipulation}
+  .half .dch button.bad{background:var(--bad);color:#fff}
+  .half.frozen .dch{opacity:.35;pointer-events:none}
+  .pips{display:flex;gap:4px}.pips i{width:16px;height:16px;border-radius:50%;background:#0001}.p1 .pips i.on{background:var(--c1)}.p2 .pips i.on{background:var(--c7)}
+  .mid{display:flex;justify-content:center;align-items:center;gap:10px;padding:6px;background:#2B2A4C}
+  .mid button{border:0;border-radius:12px;font-family:inherit;font-weight:800;font-size:16px;padding:6px 14px;background:#fff;color:var(--ink)}
+  .bigmsg{font-size:clamp(34px,9vw,52px);font-weight:800;text-align:center}
 </style>
 </head>
 <body>
@@ -199,6 +262,9 @@
     </div>
 
     <button class="learnTile" id="learnGo"><div class="ico">📚</div><div><div class="t">Aprende: unidades, decenas, centenas y millares</div><div class="s">Lección animada con voz · 10 pasos</div></div></button>
+
+    <div class="section-t">🎮 Juegos</div>
+    <div class="grid" id="gamesGrid"></div>
 
     <div id="sections"></div>
     <div class="foot">Basado en el cuaderno de Refuerzo y ampliación de Matemáticas, con nivel de 3.º de primaria.<br>
@@ -236,6 +302,16 @@
       <div class="dots" id="lDots"></div>
       <button id="lNext">▶</button>
     </div>
+  </div>
+
+  <!-- GAME -->
+  <div id="game" class="hide">
+    <div class="lhead">
+      <button class="back" id="gBack" aria-label="Volver">←</button>
+      <div class="tt" id="gTitle"></div>
+      <div class="stars" id="gScore"></div>
+    </div>
+    <div id="gBody"></div>
   </div>
 
   <!-- RESULT -->
@@ -458,7 +534,7 @@ const save=()=>{try{localStorage.setItem('mate3_best',JSON.stringify(best));loca
 
 /* ---------- UI ---------- */
 const $=id=>document.getElementById(id);
-function renderMenu(){
+let renderMenu=function(){
   let total=0;Object.values(best).forEach(v=>total+=v);$('totalStars').textContent='⭐ '+total;
   document.querySelectorAll('.chip').forEach(c=>c.classList.toggle('on',Number(c.dataset.s)===flashSecs));
   const fb=best['flash'+flashSecs]||0;$('flashBest').textContent=fb?'⭐'.repeat(fb)+'☆'.repeat(3-fb):'☆☆☆';
@@ -470,7 +546,7 @@ document.querySelectorAll('.chip').forEach(c=>c.onclick=()=>{flashSecs=Number(c.
 $('flashGo').onclick=()=>start('flash');
 
 let cur,qs,idx,score,input,answered,firstTry,timerId=null,tEnd=0,autoNext=null;
-function show(id){['menu','practice','result','learn'].forEach(x=>$(x).classList.toggle('hide',x!==id));window.scrollTo(0,0)}
+function show(id){['menu','practice','result','learn','game'].forEach(x=>$(x).classList.toggle('hide',x!==id));window.scrollTo(0,0)}
 function stopTimer(){if(timerId){cancelAnimationFrame(timerId);timerId=null}}
 function clearAll(){stopTimer();if(autoNext){clearTimeout(autoNext);autoNext=null}}
 function start(id){clearAll();cur=id==='flash'?FLASH:SECTIONS.flatMap(s=>s.items).find(i=>i.id===id);idx=0;score=0;qs=[];
@@ -665,6 +741,148 @@ $('lPrev').onclick=()=>{if(si>0){si--;renderSlide()}};
 $('lNext').onclick=()=>{if(si<SLIDES.length-1){si++;renderSlide()}};
 $('lBack').onclick=()=>{lclear();hush();renderMenu();show('menu')};
 $('lSound').onclick=()=>{voiceOn=!voiceOn;updSound();if(!voiceOn)hush();else renderSlide()};
+/* ===================== JUEGOS ===================== */
+let rec={};try{rec=JSON.parse(localStorage.getItem('mate3_rec')||'{}')}catch(e){}
+const saveRec=()=>{try{localStorage.setItem('mate3_rec',JSON.stringify(rec))}catch(e){}};
+let gTimers=[],gRaf=null;const gt=(fn,ms)=>gTimers.push(setTimeout(fn,ms));
+function gStop(){gTimers.forEach(clearTimeout);gTimers=[];if(gRaf)cancelAnimationFrame(gRaf);gRaf=null;const d=document.querySelector('.duel');if(d)d.remove()}
+const gB=()=>$('gBody');const gScore=t=>$('gScore').textContent=t;
+function gEnd(o){gStop();if(o.stars!==undefined&&o.stars>(best[o.key]||0)){best[o.key]=o.stars;save()}
+  gB().innerHTML=`<div class="gcard result"><div class="emoji">${o.emoji}</div><h2>${o.title}</h2>${o.stars!==undefined?`<div class="rs">${'⭐'.repeat(o.stars)+'☆'.repeat(3-o.stars)}</div>`:''}<p class="q">${o.sub}</p>
+   <div class="btnrow"><button class="btn" id="gAgain">Otra vez</button><button class="btn alt" id="gHome">Juegos</button></div></div>`;
+  $('gAgain').onclick=o.again;$('gHome').onclick=()=>{gStop();renderMenu();show('menu')};if(o.stars>=2)confetti()}
+const starsOf=(s,a,b,c)=>s>=a?3:s>=b?2:s>=c?1:0;
+function miniPad(onOk){return{html:`<div class="answer" id="gans">$&nbsp;</div><div class="pad">${[1,2,3,4,5,6,7,8,9].map(n=>`<button data-k="${n}">${n}</button>`).join('')}<button class="del" data-k="del">⌫</button><button data-k="0">0</button><button class="go" data-k="ok">✓</button></div>`,
+  wire(){let v='';gB().querySelectorAll('.pad button').forEach(b=>b.addEventListener('pointerdown',e=>{e.preventDefault();const k=b.dataset.k;$('gans').classList.remove('bad');
+    if(k==='del')v=v.slice(0,-1);else if(k==='ok'){if(v)onOk(Number(v),()=>{v='';$('gans').innerHTML='$&nbsp;'});return}else if(v.length<4)v+=k;$('gans').innerHTML='$'+(v||'&nbsp;')}))}}}
+
+/* ---- 1. TIENDITA ---- */
+const PRODS=[['🍦','Helado',15,35],['🧃','Jugo',12,28],['📒','Cuaderno',25,60],['✏️','Lápiz',5,15],['🧸','Peluche',80,250],['⚽','Balón',90,220],['🍫','Chocolate',10,30],['🎨','Colores',35,90],['🎒','Mochila',150,450],['🪀','Yoyo',18,45],['📚','Libro',60,180],['🍕','Pizza',99,199],['🧁','Pastelito',20,40],['🕹️','Juego',120,350]];
+const WALLET=[1,2,5,10,20,50,100,200];
+const mon=(v,extra='')=>v>=20?`<div class="money bill b${v}" ${extra}>$${v}</div>`:`<div class="money coin" ${extra}>$${v}</div>`;
+const tienda={t:'La tiendita 🛒',start(){this.r=0;this.s=0;this.next()},
+  next(){if(this.r>=8){const st=starsOf(this.s,8,6,4);return gEnd({emoji:['💪','🙂','😄','🏆'][st],title:st===3?'¡Gran compradora!':'¡Buenas compras!',sub:`Acertaste ${this.s} de 8`,stars:st,key:'g_tienda',again:()=>this.start()})}
+    this.r++;gScore(`${this.r}/8 · ✅ ${this.s}`);this.first=true;pick([()=>this.pagar(),()=>this.cambio(),()=>this.alcanza()])()},
+  ok(msg){if(this.first)this.s++;beep(true);$('tfb').innerHTML=`<span style="color:var(--ok)">${msg||pick(cheers)}</span>`;gt(()=>this.next(),1300)},
+  bad(msg){this.first=false;beep(false);$('tfb').innerHTML=`<span style="color:var(--bad)">${msg}</span>`},
+  pagar(){const p=pick(PRODS);const pr=R(p[2],Math.min(p[3],250));let paid=[];
+    gB().innerHTML=`<div class="gcard"><div class="gq">Paga <b>exacto</b> con tus monedas y billetes</div><div class="prod">${p[0]}</div><div class="gq" style="margin:0">${p[1]}</div><div class="price">$${pr}</div>
+     <div class="paid" id="paid"><span style="color:var(--muted)">Toca el dinero para pagar</span></div><div class="ptotal" id="ptot">Llevas: $0</div>
+     <div class="wallet">${WALLET.map(v=>mon(v,`data-v="${v}"`)).join('')}</div>
+     <div class="grow2"><button class="sbtn gray" id="undo">↩ Quitar</button><button class="sbtn green" id="pay">Pagar ✓</button></div><div class="fb" id="tfb"></div></div>`;
+    const upd=()=>{const t=paid.reduce((a,b)=>a+b,0);$('paid').innerHTML=paid.length?paid.map(v=>mon(v)).join(''):'<span style="color:var(--muted)">Toca el dinero para pagar</span>';$('ptot').textContent='Llevas: $'+t;return t};
+    gB().querySelectorAll('.wallet .money').forEach(m=>m.addEventListener('pointerdown',e=>{e.preventDefault();if(paid.length<20){paid.push(Number(m.dataset.v));upd()}}));
+    $('undo').onclick=()=>{paid.pop();upd()};
+    $('pay').onclick=()=>{const t=upd();if(t===pr){$('pay').disabled=true;this.ok('¡Pagaste exacto! 🎉')}else if(t>pr)this.bad(`Te pasaste por $${t-pr}. Quita algo 😉`);else this.bad(`Te faltan $${pr-t}`)}},
+  cambio(){const n=R(1,3);const items=shuffle(PRODS).slice(0,n).map(p=>[p[0],p[1],R(p[2],Math.min(p[3],n>1?140:300))]);const tot=items.reduce((a,b)=>a+b[2],0);
+    const bill=[50,100,200,500].find(b=>b>tot)||500;if(tot>=500)return this.cambio();
+    const pad=miniPad((v,clr)=>{if(v===bill-tot){$('gans').classList.add('ok');this.ok(`¡Exacto! $${bill} − $${tot} = $${bill-tot}`)}else{$('gans').classList.add('bad');clr();this.bad(this.first?'Casi… revisa la cuenta 🤔':`Era $${bill-tot}: primero sumas $${tot}, luego ${bill} − ${tot}`);if(!this.first&&this.tries++>=1)gt(()=>this.next(),2200)}});this.tries=0;
+    gB().innerHTML=`<div class="gcard"><div class="basket">${items.map(i=>`<div><span class="e">${i[0]}</span>$${i[2]}</div>`).join('')}</div>
+     <div class="gq">${n>1?'Compras todo esto y ':'Compras '+items[0][1].toLowerCase()+' y '}pagas con ${mon(bill,'style="display:inline-flex;vertical-align:middle;transform:scale(.8)"')}<br>¿Cuánto te dan de <b>cambio</b>?</div>${pad.html}<div class="fb" id="tfb"></div></div>`;pad.wire()},
+  alcanza(){const a=pick(PRODS),b=pick(PRODS.filter(x=>x!==a));const pa=R(a[2],a[3]),pb=R(b[2],b[3]);const tot=pa+pb;const have=R(0,1)?tot+R(0,40):tot-R(5,40);const yes=have>=tot;
+    gB().innerHTML=`<div class="gcard"><div class="gq">Tienes <span class="price">$${have}</span></div><div class="basket" style="margin:14px 0">${[[a,pa],[b,pb]].map(([p,v])=>`<div><span class="e">${p[0]}</span>${p[1]}<br>$${v}</div>`).join('')}</div>
+     <div class="gq">¿Te alcanza para comprar <b>los dos</b>?</div><div class="grow2"><button class="sbtn green" data-a="1" style="font-size:26px;padding:12px 30px">Sí</button><button class="sbtn red" data-a="0" style="font-size:26px;padding:12px 30px">No</button></div><div class="fb" id="tfb"></div></div>`;
+    gB().querySelectorAll('[data-a]').forEach(btn=>btn.onclick=()=>{gB().querySelectorAll('[data-a]').forEach(x=>x.disabled=true);
+      const exp=`$${pa} + $${pb} = $${tot}; tienes $${have}`;if((btn.dataset.a==='1')===yes)this.ok('¡Correcto! '+exp);else{this.bad((yes?'¡Sí alcanza! ':'No alcanza. ')+exp);gt(()=>this.next(),2600)}})}};
+
+/* ---- 2. MEMORAMA ---- */
+const memo={t:'Memorama de tablas 🃏',start(){gStop();const used=new Set(),pairs=[];while(pairs.length<6){const a=R(2,10),b=R(2,10);if(used.has(a*b))continue;used.add(a*b);pairs.push([a,b])}
+    this.cards=shuffle(pairs.flatMap((p,i)=>[{i,t:`${p[0]}×${p[1]}`,c:'op'},{i,t:String(p[0]*p[1]),c:'res'}]));this.open=[];this.done=0;this.moves=0;this.t0=Date.now();this.lock=false;
+    gB().innerHTML=`<div class="gcard"><div class="minfo"><span id="mmoves">Intentos: 0</span><span id="mtime">⏱ 0 s</span></div><div class="gq" style="font-size:18px">Junta cada multiplicación con su resultado</div><div class="mgrid">${this.cards.map((c,k)=>`<button class="mc" data-k="${k}">?</button>`).join('')}</div></div>`;
+    gScore(rec.memo?`Récord: ${rec.memo} intentos`:'');
+    gB().querySelectorAll('.mc').forEach(b=>b.addEventListener('pointerdown',e=>{e.preventDefault();this.flip(b)}));
+    const tick=()=>{if($('mtime'))$('mtime').textContent='⏱ '+Math.floor((Date.now()-this.t0)/1000)+' s';gt(tick,500)};tick()},
+  flip(b){const c=this.cards[b.dataset.k];if(this.lock||b.classList.contains('up')||b.classList.contains('done'))return;
+    b.classList.add('up',c.c);b.textContent=c.t;this.open.push(b);
+    if(this.open.length===2){this.moves++;$('mmoves').textContent='Intentos: '+this.moves;const[x,y]=this.open,cx=this.cards[x.dataset.k],cy=this.cards[y.dataset.k];
+      if(cx.i===cy.i&&cx.c!==cy.c){beep(true);[x,y].forEach(z=>{z.classList.add('done')});this.open=[];this.done++;
+        if(this.done===6){const secs=Math.floor((Date.now()-this.t0)/1000);const st=this.moves<=9?3:this.moves<=13?2:1;const nr=!rec.memo||this.moves<rec.memo;if(nr){rec.memo=this.moves;saveRec()}
+          gt(()=>gEnd({emoji:'🧠',title:nr?'¡Nuevo récord!':'¡Lo lograste!',sub:`${this.moves} intentos en ${secs} segundos`,stars:st,key:'g_memo',again:()=>this.start()}),700)}}
+      else{this.lock=true;gt(()=>{[x,y].forEach(z=>{z.classList.remove('up','op','res');z.textContent='?'});this.open=[];this.lock=false},900)}}}};
+
+/* ---- 3. LLUVIA DE GLOBOS ---- */
+const BCOL=['#FF6B6B','#6C63FF','#2EC4B6','#F15BB5','#FFB703','#00A6FB','#8AC926'];
+function quickOp(hard){const t=R(0,hard?3:2);
+  if(t<=1){const a=R(2,10),b=R(2,10);return{q:`${a} × ${b}`,a:a*b}}
+  if(t===2){const a=R(2,9)*10,b=R(1,9)*(R(0,1)?10:1);return R(0,1)?{q:`${a} + ${b}`,a:a+b}:{q:`${a+b} − ${b}`,a:a}}
+  const a=R(11,49),b=R(11,49);return{q:`${a} + ${b}`,a:a+b}}
+function distract(ans,n){const s=new Set([ans]);let g=0;while(s.size<n+1&&g<100){g++;const v=ans+pick([-10,-2,-1,1,2,10,R(-9,9)]);if(v>0)s.add(v)}return[...s].filter(v=>v!==ans).slice(0,n)}
+const globos={t:'Lluvia de globos 🎈',start(){gStop();this.score=0;this.lives=3;this.speed=70;
+    gB().innerHTML=`<div class="gtop"><div class="lives" id="glv"></div><div class="gop" id="gop"></div><div class="lives" id="gpt">0</div></div><div class="sky" id="sky">
+     <div class="cloud" style="width:90px;height:30px;left:8%;top:12%"></div><div class="cloud" style="width:120px;height:36px;left:60%;top:22%"></div><div class="gmsg" id="gmsg">¡Revienta el globo correcto!</div></div>`;
+    gScore(rec.globos?`Récord: ${rec.globos}`:'');this.upd();gt(()=>{$('gmsg').textContent='';this.wave()},1500);
+    let last=performance.now();const loop=now=>{const dt=Math.min(.05,(now-last)/1000);last=now;this.step(dt);gRaf=requestAnimationFrame(loop)};gRaf=requestAnimationFrame(loop)},
+  upd(){$('glv').textContent='❤️'.repeat(this.lives)+'🤍'.repeat(3-this.lives);$('gpt').textContent='⭐ '+this.score},
+  wave(){const sky=$('sky');sky.querySelectorAll('.bal').forEach(b=>b.remove());this.op=quickOp(this.score>=8);$('gop').textContent=this.op.q+' = ?';
+    const vals=shuffle([this.op.a,...distract(this.op.a,3)]);const H=sky.clientHeight,W=sky.clientWidth;this.bals=[];this.active=true;
+    vals.forEach((v,i)=>{const el=document.createElement('div');el.className='bal';const c=pick(BCOL);el.innerHTML=`<div class="b" style="background:${c}">${v}</div><div class="s"></div>`;
+      const x=W*(i+.5)/vals.length+R(-10,10);const y=H+R(0,90);el.style.left=x+'px';el.style.top=y+'px';sky.appendChild(el);const o={el,v,y};this.bals.push(o);
+      el.addEventListener('pointerdown',e=>{e.preventDefault();this.tap(o)})})},
+  tap(o){if(!this.active||o.el.classList.contains('gone'))return;
+    if(o.v===this.op.a){this.active=false;o.el.classList.add('popped');this.score++;this.speed=Math.min(170,this.speed+5);beep(true);this.upd();gt(()=>this.wave(),350)}
+    else{o.el.classList.add('gone');beep(false);this.lose()}},
+  lose(){this.lives--;this.upd();if(this.lives<=0){this.active=false;gt(()=>this.over(),500)}},
+  step(dt){if(!this.active||!this.bals)return;let all=true;for(const b of this.bals){b.y-=this.speed*dt;b.el.style.top=b.y+'px';if(b.y>-110)all=false}
+    if(all){this.active=false;$('gmsg').textContent=`¡Se escapó! Era ${this.op.a}`;beep(false);this.lose();if(this.lives>0)gt(()=>{$('gmsg').textContent='';this.wave()},1300)}},
+  over(){const nr=this.score>(rec.globos||0);if(nr){rec.globos=this.score;saveRec()}const st=starsOf(this.score,20,12,6);
+    gEnd({emoji:'🎈',title:nr&&this.score>0?'¡Nuevo récord!':'¡Se acabaron las vidas!',sub:`Reventaste ${this.score} globos${rec.globos?` · Récord: ${rec.globos}`:''}`,stars:st,key:'g_globos',again:()=>this.start()})}};
+
+/* ---- 4. NÚMERO MISTERIOSO ---- */
+const PN=[['millar','millares'],['centena','centenas'],['decena','decenas'],['unidad','unidades']];
+const dg=(n,k)=>Number(String(n)[k]);
+function mysteryRound(){const n=R(1000,9999),d=digits(n);const ks=shuffle([0,1,2,3]).slice(0,2);
+  const clues=ks.map(k=>({t:`Tengo <b>${d[k]}</b> ${d[k]===1?PN[k][0]:PN[k][1]}`,test:x=>dg(x,k)===d[k]}));
+  const extra=[{t:`Soy un número <b>${n%2?'impar':'par'}</b>`,test:x=>x%2===n%2},
+    {t:`La suma de mis cifras es <b>${d.reduce((a,b)=>a+b,0)}</b>`,test:x=>digits(x).reduce((a,b)=>a+b,0)===d.reduce((a,b)=>a+b,0)}];
+  const lo=n-R(5,60),hi=n+R(5,60);extra.push({t:`Soy mayor que <b>${f(lo)}</b> y menor que <b>${f(hi)}</b>`,test:x=>x>lo&&x<hi});
+  if(d[2]>0&&d[3]===2*d[2])extra.push({t:'Mis unidades son el <b>doble</b> de mis decenas',test:x=>dg(x,3)===2*dg(x,2)});
+  clues.push(...shuffle(extra).slice(0,R(1,2)));
+  const ok=x=>clues.every(c=>c.test(x));const ch=new Set([n]);let g=0;
+  while(ch.size<4&&g<500){g++;let c;const t=R(0,2);const a=d.slice();
+    if(t===0){const k=R(0,3);a[k]=(a[k]+pick([1,2,9,8]))%10}else if(t===1){const i=R(0,3),j=R(0,3);[a[i],a[j]]=[a[j],a[i]]}else{const k=R(1,3);a[k]=(a[k]+5)%10}
+    if(a[0]===0)continue;c=Number(a.join(''));if(c!==n&&!ok(c))ch.add(c)}
+  return{n,clues,choices:shuffle([...ch])}}
+const miste={t:'El número misterioso 🕵️',start(){this.r=0;this.s=0;this.next()},
+  next(){if(this.r>=6){const st=starsOf(this.s,6,5,3);return gEnd({emoji:'🕵️',title:st===3?'¡Gran detective!':'¡Buen trabajo, detective!',sub:`Resolviste ${this.s} de 6 a la primera`,stars:st,key:'g_miste',again:()=>this.start()})}
+    this.r++;gScore(`${this.r}/6 · ✅ ${this.s}`);const m=mysteryRound();let first=true;
+    gB().innerHTML=`<div class="gcard"><div class="gq">¿Quién soy? 🤔</div><div class="clues">${m.clues.map(c=>`<div class="clue">${c.t}</div>`).join('')}</div>
+     <div class="choices">${m.choices.map(c=>`<button data-v="${c}">${f(c)}</button>`).join('')}</div><div class="fb" id="tfb"></div><button class="next" id="mnext">Siguiente →</button></div>`;
+    gB().querySelectorAll('.choices button').forEach(b=>b.onclick=()=>{const v=Number(b.dataset.v);
+      if(v===m.n){b.classList.add('ok');if(first)this.s++;beep(true);$('tfb').innerHTML=`<span style="color:var(--ok)">${first?'¡Lo encontraste! 🎉':'¡Ahora sí! 👍'}</span>`;gB().querySelectorAll('.choices button').forEach(x=>x.disabled=true);$('mnext').style.display='block'}
+      else{b.classList.add('bad');b.disabled=true;beep(false);const bad=m.clues.find(c=>!c.test(v));
+        $('tfb').innerHTML=`<span style="color:var(--bad)">${f(v)} no cumple: “${bad.t.replace(/<[^>]+>/g,'')}”</span>`;first=false}});
+    $('mnext').onclick=()=>this.next()}};
+
+/* ---- 5. DUELO ---- */
+function duelQ(hard){if(!hard)return quickOp(false);const t=R(0,2);
+  if(t===0){const a=R(12,49),b=R(3,9);return{q:`${a} × ${b}`,a:a*b}}if(t===1){const a=R(120,880),b=R(15,99);return{q:`${a} + ${b}`,a:a+b}}const a=R(6,12),b=R(6,12);return{q:`${a} × ${b}`,a:a*b}}
+const duelo={t:'Papá vs. hija 🏁',start(){gStop();gScore('');
+    gB().innerHTML=`<div class="gcard"><div class="prod">🏁</div><div class="gq">Pongan la tablet en la mesa, uno de cada lado.<br>Gana el primero en contestar <b>10</b> bien.</div>
+     <div class="gq" style="font-size:19px;color:var(--muted)">Si fallas, te congelas 1 segundo 🧊</div>
+     <div class="grow2" style="flex-direction:column;align-items:center"><button class="sbtn" id="dEq" style="font-size:22px">⚖️ Mismo nivel</button><button class="sbtn" id="dHard" style="font-size:22px;background:var(--c1);box-shadow:0 5px 0 #b84545">😎 Papá con preguntas difíciles</button></div></div>`;
+    $('dEq').onclick=()=>this.go(false);$('dHard').onclick=()=>this.go(true)},
+  go(hard){this.hard=hard;this.sc=[0,0];this.over=false;const d=document.createElement('div');d.className='duel';
+    const half=(p,name)=>`<div class="half p${p}" id="h${p}"><div class="who">${name}</div><div class="pips">${'<i></i>'.repeat(10)}</div><div class="dq">¡Listos!</div><div class="dch"></div></div>`;
+    d.innerHTML=half(1,hard?'😎 Papá (nivel difícil)':'🔴 Jugador 1')+`<div class="mid"><button id="dExit">← Salir</button><button id="dRe">↻ Revancha</button></div>`+half(2,'🔵 Jugador 2');document.body.appendChild(d);
+    $('dExit').onclick=()=>{gStop();renderMenu();show('menu')};$('dRe').onclick=()=>{gStop();this.go(hard)};
+    let c=3;const cd=()=>{[1,2].forEach(p=>$('h'+p).querySelector('.dq').textContent=c||'¡Ya!');if(c--<=0){gt(()=>{this.q(1);this.q(2)},400)}else gt(cd,800)};cd()},
+  q(p){if(this.over)return;const h=$('h'+p);const o=duelQ(p===1&&this.hard);h.querySelector('.dq').textContent=o.q;
+    const ch=shuffle([o.a,...distract(o.a,3)]);h.querySelector('.dch').innerHTML=ch.map(v=>`<button data-v="${v}">${v}</button>`).join('');
+    h.querySelectorAll('.dch button').forEach(b=>b.addEventListener('pointerdown',e=>{e.preventDefault();if(this.over||h.classList.contains('frozen'))return;
+      if(Number(b.dataset.v)===o.a){this.sc[p-1]++;h.querySelectorAll('.pips i').forEach((x,i)=>x.classList.toggle('on',i<this.sc[p-1]));beep(true);
+        if(this.sc[p-1]>=10)this.win(p);else this.q(p)}
+      else{b.classList.add('bad');beep(false);h.classList.add('frozen');gt(()=>h.classList.remove('frozen'),1000)}}))},
+  win(p){this.over=true;[1,2].forEach(k=>{const h=$('h'+k);h.querySelector('.dq').innerHTML=`<div class="bigmsg">${k===p?'¡Ganaste! 🏆':'¡Casi! 💪'}</div>`;h.querySelector('.dch').innerHTML=''});confetti()}};
+
+const GAMES={tienda:{...tienda,ico:'🛒',s:'Paga y calcula el cambio',c:'--c3'},memo:{...memo,ico:'🃏',s:'Encuentra las parejas',c:'--c4'},globos:{...globos,ico:'🎈',s:'Revienta la respuesta',c:'--c7'},
+  miste:{...miste,ico:'🕵️',s:'Adivina con pistas',c:'--c6'},duelo:{...duelo,ico:'🏁',s:'2 jugadores',c:'--c1'}};
+const GTITLE={tienda:'La tiendita',memo:'Memorama de tablas',globos:'Lluvia de globos',miste:'El número misterioso',duelo:'Papá vs. hija'};
+function renderGames(){$('gamesGrid').innerHTML=Object.entries(GAMES).map(([k,g])=>{const b=best['g_'+k]||0;
+  const extra=k==='globos'&&rec.globos?`Récord: ${rec.globos}`:k==='memo'&&rec.memo?`Récord: ${rec.memo} intentos`:k==='duelo'?'':(b?'⭐'.repeat(b)+'☆'.repeat(3-b):'☆☆☆');
+  return `<button class="tile gtile" style="background:var(${g.c})" data-g="${k}"><div class="ico">${g.ico}</div><div><div class="t">${GTITLE[k]}</div><div class="s">${g.s}</div><div class="best">${extra}</div></div></button>`}).join('');
+  document.querySelectorAll('[data-g]').forEach(b=>b.onclick=()=>{const g=GAMES[b.dataset.g];gStop();$('gTitle').textContent=g.t;show('game');g.start()})}
+const _rm=renderMenu;renderMenu=function(){_rm();renderGames()};
+$('gBack').onclick=()=>{gStop();renderMenu();show('menu')};
 renderMenu();
 try{if('serviceWorker' in navigator&&location.protocol==='https:'&&location.hostname.endsWith('github.io'))navigator.serviceWorker.register('sw.js')}catch(e){}
 </script>
