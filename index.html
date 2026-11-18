@@ -118,6 +118,61 @@
   @keyframes fall{to{transform:translateY(110vh) rotate(720deg)}}
   .foot{color:var(--muted);text-align:center;font-size:14px;margin-top:24px}
   .reset{background:none;border:0;color:var(--muted);text-decoration:underline;font-family:inherit;font-size:14px;cursor:pointer}
+  /* ===== LEARN ===== */
+  .learnTile{margin-top:14px;width:100%;border:0;border-radius:26px;padding:14px 16px;display:flex;align-items:center;gap:14px;cursor:pointer;font-family:inherit;text-align:left;
+    background:linear-gradient(135deg,#FFE08A,#FFB703);color:#2B2A4C;box-shadow:0 6px 0 #c98f00}
+  .learnTile:active{transform:translateY(4px);box-shadow:0 2px 0 #c98f00}
+  .learnTile .ico{font-size:44px}
+  .learnTile .t{font-size:22px;font-weight:800;line-height:1.1}
+  .learnTile .s{font-size:15px}
+  .lhead{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+  .lhead .tt{flex:1;font-weight:800;font-size:20px}
+  .sound{border:0;background:var(--card);border-radius:14px;font-size:22px;padding:6px 12px;cursor:pointer;box-shadow:0 3px 0 #0001}
+  .slide{background:var(--card);border-radius:28px;padding:20px 16px 18px;box-shadow:0 8px 0 #00000012;text-align:center;min-height:440px;display:flex;flex-direction:column}
+  .slide h2{margin:0;font-size:clamp(24px,6vw,34px);line-height:1.1}
+  .slide .stage{flex:1;display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:6px;min-height:250px;margin:10px 0;position:relative}
+  .slide p{font-size:clamp(19px,4.6vw,23px);line-height:1.35;margin:6px 0 0}
+  .slide p b.u{color:#C98A00} .slide p b.d{color:#1E9E95} .slide p b.c{color:#5A52E0} .slide p b.m{color:#D9419B}
+  .counter{position:absolute;top:0;right:4px;font-size:34px;font-weight:800;color:var(--c4)}
+  .lnav{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:14px}
+  .lnav button{border:0;border-radius:18px;font-family:inherit;font-weight:800;font-size:22px;padding:10px 20px;cursor:pointer;background:var(--c4);color:#fff;box-shadow:0 5px 0 #4b43c9}
+  .lnav button:disabled{opacity:.35}
+  .dots{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
+  .dots i{width:10px;height:10px;border-radius:50%;background:#0002}
+  .dots i.on{background:var(--c4);width:22px;border-radius:6px}
+  .listen{border:0;border-radius:999px;background:#FFF0C2;color:#8a5d00;font-family:inherit;font-weight:800;font-size:17px;padding:6px 16px;margin:10px auto 0;cursor:pointer}
+  .pop{animation:pop .35s both}
+  @keyframes pop{from{transform:scale(0);opacity:0}70%{transform:scale(1.2)}to{transform:scale(1);opacity:1}}
+  .grow{animation:grow .6s both}
+  @keyframes grow{from{transform:scale(.3);opacity:0}to{transform:scale(1);opacity:1}}
+  .fadeout{transition:opacity .4s,transform .4s;opacity:0!important;transform:scale(.6)}
+  .lbl{font-weight:800;font-size:22px;margin-top:6px}
+  .fam{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;align-items:end;width:100%}
+  .fam div{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:4px;font-weight:800;font-size:16px;line-height:1.1}
+  .fam small{font-size:14px;color:var(--muted);font-weight:700}
+  .pvt{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;width:100%;max-width:440px}
+  .pvt .h{border-radius:12px 12px 0 0;color:#fff;font-weight:800;font-size:15px;padding:4px 2px;line-height:1.1}
+  .pvt .v{background:#FBFAFF;border:3px solid #EEE;border-top:0;border-radius:0 0 12px 12px;font-size:clamp(38px,10vw,56px);font-weight:800;line-height:1.2}
+  .pvt .x{font-size:15px;font-weight:700;color:var(--muted);padding-top:2px}
+  .pvt .zero{color:#bbb}
+  .sum{font-size:clamp(20px,5vw,26px);font-weight:800;margin-top:10px}
+  .sum span{padding:0 2px}
+  .bm{background:#D9419B}.bc{background:#6C63FF}.bd{background:#2EC4B6}.bu{background:#FFB703}
+  .tm{color:#D9419B}.tc{color:#5A52E0}.td{color:#1E9E95}.tu{color:#C98A00}
+  .bill.b1000{background:linear-gradient(135deg,#C9E4F5,#8EC3E6);border-color:#2f6f99;color:#0f3c5c;width:100px}
+  .builder{width:100%}
+  .bnum{font-size:clamp(46px,13vw,72px);font-weight:800;line-height:1}
+  .bwords{font-size:20px;color:var(--muted);font-weight:700;min-height:28px;margin-bottom:8px}
+  .bcols{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+  .bcol{border-radius:16px;padding:6px 2px;color:#fff}
+  .bcol .nm{font-size:14px;font-weight:800;line-height:1.1}
+  .bcol .dg{font-size:40px;font-weight:800;line-height:1.1}
+  .bcol button{display:block;width:100%;border:0;background:#ffffff40;color:#fff;border-radius:10px;font-size:26px;font-weight:800;font-family:inherit;padding:2px 0;margin:3px 0;cursor:pointer;touch-action:manipulation}
+  .bcol button:active{background:#ffffff70}
+  .bblocks{display:flex;flex-wrap:wrap;gap:4px;justify-content:center;align-items:flex-end;min-height:56px;margin-top:10px;padding:8px;background:#F7F6FF;border-radius:16px}
+  .goal{margin-top:10px;font-size:20px;font-weight:800}
+  .goal.done{color:var(--ok)}
+  .goal button{border:0;border-radius:14px;background:var(--c6);color:#fff;font-family:inherit;font-weight:800;font-size:17px;padding:6px 14px;margin-left:6px;cursor:pointer}
 </style>
 </head>
 <body>
@@ -143,6 +198,8 @@
       <button class="go" id="flashGo">¡Jugar!</button>
     </div>
 
+    <button class="learnTile" id="learnGo"><div class="ico">📚</div><div><div class="t">Aprende: unidades, decenas, centenas y millares</div><div class="s">Lección animada con voz · 10 pasos</div></div></button>
+
     <div id="sections"></div>
     <div class="foot">Basado en el cuaderno de Refuerzo y ampliación de Matemáticas, con nivel de 3.º de primaria.<br>
       <button class="reset" id="resetBtn">Borrar estrellas</button></div>
@@ -163,6 +220,21 @@
       <div class="fb" id="fb"></div>
       <div class="explain" id="explain"></div>
       <button class="next" id="nextBtn">Siguiente →</button>
+    </div>
+  </div>
+
+  <!-- LEARN -->
+  <div id="learn" class="hide">
+    <div class="lhead">
+      <button class="back" id="lBack" aria-label="Volver">←</button>
+      <div class="tt">📚 Aprende</div>
+      <button class="sound" id="lSound" aria-label="Voz">🔊</button>
+    </div>
+    <div class="slide" id="slide"></div>
+    <div class="lnav">
+      <button id="lPrev">◀</button>
+      <div class="dots" id="lDots"></div>
+      <button id="lNext">▶</button>
     </div>
   </div>
 
@@ -398,7 +470,7 @@ document.querySelectorAll('.chip').forEach(c=>c.onclick=()=>{flashSecs=Number(c.
 $('flashGo').onclick=()=>start('flash');
 
 let cur,qs,idx,score,input,answered,firstTry,timerId=null,tEnd=0,autoNext=null;
-function show(id){['menu','practice','result'].forEach(x=>$(x).classList.toggle('hide',x!==id));window.scrollTo(0,0)}
+function show(id){['menu','practice','result','learn'].forEach(x=>$(x).classList.toggle('hide',x!==id));window.scrollTo(0,0)}
 function stopTimer(){if(timerId){cancelAnimationFrame(timerId);timerId=null}}
 function clearAll(){stopTimer();if(autoNext){clearTimeout(autoNext);autoNext=null}}
 function start(id){clearAll();cur=id==='flash'?FLASH:SECTIONS.flatMap(s=>s.items).find(i=>i.id===id);idx=0;score=0;qs=[];
@@ -468,6 +540,131 @@ let ac;function beep(ok){try{ac=ac||new (window.AudioContext||window.webkitAudio
   g.gain.setValueAtTime(.12,t);g.gain.exponentialRampToValueAtTime(.001,t+.3);o.start(t);o.stop(t+.3)}catch(e){}}
 document.addEventListener('keydown',e=>{if($('practice').classList.contains('hide'))return;
   if(/^[0-9]$/.test(e.key))key(e.key);else if(e.key==='Backspace')key('del');else if(e.key==='Enter'){if(answered&&!cur.timed)$('nextBtn').click();else key('ok')}});
+/* ===================== LECCIÓN: VALOR POSICIONAL ===================== */
+const COL={u:['#FFB703','#C98A00'],d:['#2EC4B6','#1E9E95'],c:['#6C63FF','#4b43c9'],m:['#F15BB5','#B8357F']};
+function svgUnit(s=26){return `<svg width="${s}" height="${s}" viewBox="0 0 10 10"><rect x=".5" y=".5" width="9" height="9" rx="1.6" fill="${COL.u[0]}" stroke="${COL.u[1]}" stroke-width="1"/></svg>`}
+function svgBar(w=24,horiz=false){const h=w*10;let g='';for(let i=1;i<10;i++)g+=`<line x1="0" y1="${i*10}" x2="10" y2="${i*10}" stroke="${COL.d[1]}" stroke-width=".6"/>`;
+  const svg=`<svg width="${horiz?h:w}" height="${horiz?w:h}" viewBox="0 0 ${horiz?100:10} ${horiz?10:100}"><g ${horiz?'transform="rotate(-90 50 50) translate(0 0)"':''}></g>`;
+  if(horiz){let gg='';for(let i=1;i<10;i++)gg+=`<line x1="${i*10}" y1="0" x2="${i*10}" y2="10" stroke="${COL.d[1]}" stroke-width=".6"/>`;
+    return `<svg width="${h}" height="${w}" viewBox="0 0 100 10"><rect x=".4" y=".4" width="99.2" height="9.2" rx="1.5" fill="${COL.d[0]}" stroke="${COL.d[1]}" stroke-width=".8"/>${gg}</svg>`}
+  return `<svg width="${w}" height="${h}" viewBox="0 0 10 100"><rect x=".4" y=".4" width="9.2" height="99.2" rx="1.5" fill="${COL.d[0]}" stroke="${COL.d[1]}" stroke-width=".8"/>${g}</svg>`}
+function svgPlate(s=220){let g='';for(let i=1;i<10;i++)g+=`<line x1="${i*10}" y1="0" x2="${i*10}" y2="100" stroke="${COL.c[1]}" stroke-width=".5"/><line x1="0" y1="${i*10}" x2="100" y2="${i*10}" stroke="${COL.c[1]}" stroke-width=".5"/>`;
+  return `<svg width="${s}" height="${s}" viewBox="0 0 100 100"><rect x=".5" y=".5" width="99" height="99" rx="3" fill="${COL.c[0]}" stroke="${COL.c[1]}" stroke-width="1.2"/>${g}</svg>`}
+function svgCube(s=180){const d=40;let g='';
+  for(let i=1;i<10;i++){const t=i*10;
+    g+=`<line x1="${t}" y1="${d}" x2="${t}" y2="${100+d}" /><line x1="0" y1="${d+t}" x2="100" y2="${d+t}" />`;
+    g+=`<line x1="${t}" y1="${d}" x2="${t+d}" y2="0" /><line x1="${t*d/100}" y1="${d-t*d/100}" x2="${100+t*d/100}" y2="${d-t*d/100}" />`;
+    g+=`<line x1="100" y1="${d+t}" x2="${100+d}" y2="${t}" /><line x1="${100+t*d/100}" y1="${d-t*d/100}" x2="${100+t*d/100}" y2="${100+d-t*d/100}" />`}
+  return `<svg width="${s}" height="${s}" viewBox="-2 -2 ${144} ${144}">
+   <polygon points="0,${d} ${d},0 ${100+d},0 100,${d}" fill="#F98CCB"/>
+   <polygon points="100,${d} ${100+d},0 ${100+d},100 100,${100+d}" fill="#C9338A"/>
+   <rect x="0" y="${d}" width="100" height="100" fill="${COL.m[0]}"/>
+   <g stroke="${COL.m[1]}" stroke-width=".5">${g}</g>
+   <g fill="none" stroke="${COL.m[1]}" stroke-width="1.5"><polygon points="0,${d} ${d},0 ${100+d},0 ${100+d},100 100,${100+d} 0,${100+d}"/><polyline points="0,${d} 100,${d} ${100+d},0"/><line x1="100" y1="${d}" x2="100" y2="${100+d}"/></g></svg>`}
+function svgSlab(w=180){return `<svg width="${w}" height="${w*.33}" viewBox="0 0 140 46"><polygon points="0,40 40,0 140,0 100,40" fill="${COL.c[0]}" stroke="${COL.c[1]}" stroke-width="1.5"/><polygon points="0,40 100,40 100,46 0,46" fill="#4b43c9"/><polygon points="100,40 140,0 140,6 100,46" fill="#3a33a8"/></svg>`}
+
+function enPalabras(n){
+  const U=['cero','uno','dos','tres','cuatro','cinco','seis','siete','ocho','nueve','diez','once','doce','trece','catorce','quince','dieciséis','diecisiete','dieciocho','diecinueve','veinte','veintiuno','veintidós','veintitrés','veinticuatro','veinticinco','veintiséis','veintisiete','veintiocho','veintinueve'];
+  const D=['','','','treinta','cuarenta','cincuenta','sesenta','setenta','ochenta','noventa'];
+  const C=['','ciento','doscientos','trescientos','cuatrocientos','quinientos','seiscientos','setecientos','ochocientos','novecientos'];
+  const menor100=x=>x<30?U[x]:D[Math.floor(x/10)]+(x%10?' y '+U[x%10]:'');
+  const menor1000=x=>x===100?'cien':(x>=100?C[Math.floor(x/100)]+(x%100?' '+menor100(x%100):''):menor100(x));
+  if(n===0)return 'cero';const m=Math.floor(n/1000),r=n%1000;
+  return ((m?(m===1?'mil':menor1000(m)+' mil'):'')+(r?(m?' ':'')+menor1000(r):'')).trim()}
+
+/* voz */
+let voiceOn=true;try{voiceOn=localStorage.getItem('mate3_voice')!=='0'}catch(e){}
+let esVoice=null;function pickVoice(){try{const v=speechSynthesis.getVoices();esVoice=v.find(x=>/es[-_]MX/i.test(x.lang))||v.find(x=>/^es/i.test(x.lang))||null}catch(e){}}
+try{pickVoice();speechSynthesis.onvoiceschanged=pickVoice}catch(e){}
+function say(t){try{speechSynthesis.cancel();if(!voiceOn)return;const u=new SpeechSynthesisUtterance(t.replace(/<[^>]+>/g,'').replace(/,(?=\d{3})/g,''));u.lang='es-MX';if(esVoice)u.voice=esVoice;u.rate=.92;u.pitch=1.1;speechSynthesis.speak(u)}catch(e){}}
+function hush(){try{speechSynthesis.cancel()}catch(e){}}
+
+let lTimers=[];const lt=(fn,ms)=>lTimers.push(setTimeout(fn,ms));const lclear=()=>{lTimers.forEach(clearTimeout);lTimers=[]};
+const ex1=(()=>{return R(1,9)*1000+R(1,9)*100+R(1,9)*10+R(1,9)});
+let pvNum=3452,bld={m:1,c:2,d:3,u:4},goal=null;
+
+function pvTable(n,showX=true){const d=String(n).padStart(4,'0').split('').map(Number);const k=['m','c','d','u'],nm=['Millares','Centenas','Decenas','Unidades'],v=[1000,100,10,1];
+  return `<div class="pvt">${k.map((x,i)=>`<div><div class="h b${x}">${nm[i]}</div><div class="v t${x} ${d[i]===0?'zero':''}">${d[i]}</div>${showX?`<div class="x">${d[i]} × ${f(v[i])}<br><b class="t${x}">= ${f(d[i]*v[i])}</b></div>`:''}</div>`).join('')}</div>`}
+
+const SLIDES=[
+ {t:'Los números se arman con bloques',
+  say:'¡Hola! Los números se arman como si fueran bloques de construcción. Hay cuatro bloques: la unidad, la decena, la centena y el millar. ¡Vamos a conocerlos uno por uno!',
+  html:()=>`<div class="fam"><div class="pop" style="animation-delay:.1s">${svgUnit(22)}Unidad<small>1</small></div><div class="pop" style="animation-delay:.6s">${svgBar(14)}Decena<small>10</small></div><div class="pop" style="animation-delay:1.1s">${svgPlate(70)}Centena<small>100</small></div><div class="pop" style="animation-delay:1.6s">${svgCube(84)}Millar<small>1,000</small></div></div>`,
+  p:'Hay 4 bloques: <b class="u">unidad</b>, <b class="d">decena</b>, <b class="c">centena</b> y <b class="m">millar</b>.'},
+ {t:'La unidad',
+  say:'La unidad es el bloque más pequeño. Vale uno. Mira cómo contamos unidades: uno, dos, tres, cuatro, cinco, seis, siete, ocho, nueve.',
+  html:()=>`<div class="counter" id="cnt"></div><div id="row" style="display:flex;flex-wrap:wrap;gap:6px;justify-content:center;max-width:340px"></div>`,
+  run(){for(let i=1;i<=9;i++)lt(()=>{$('row').insertAdjacentHTML('beforeend',`<span class="pop">${svgUnit(30)}</span>`);$('cnt').textContent=i},400+i*550)},
+  p:'La <b class="u">unidad</b> es un cubito. Vale <b class="u">1</b>.'},
+ {t:'10 unidades = 1 decena',
+  say:'¿Qué pasa cuando juntamos diez unidades? Uno, dos, tres, cuatro, cinco, seis, siete, ocho, nueve, ¡diez! Diez unidades se pegan y forman una barra. Esa barra se llama decena, y vale diez.',
+  html:()=>`<div class="counter" id="cnt"></div><div id="row" style="display:flex;flex-direction:column-reverse;gap:2px;align-items:center"></div><div id="res" style="display:none" class="grow">${svgBar(26)}<div class="lbl td">1 decena = 10</div></div>`,
+  run(){for(let i=1;i<=10;i++)lt(()=>{$('row').insertAdjacentHTML('beforeend',`<span class="pop" style="line-height:0">${svgUnit(24)}</span>`);$('cnt').textContent=i},500+i*480);
+    lt(()=>{$('row').classList.add('fadeout')},5600);lt(()=>{$('row').style.display='none';$('res').style.display='block'},6000)},
+  p:'<b class="u">10 unidades</b> forman <b class="d">1 decena</b>. ¡La decena vale <b class="d">10</b>!'},
+ {t:'10 decenas = 1 centena',
+  say:'Ahora juntemos decenas: diez, veinte, treinta, cuarenta, cincuenta, sesenta, setenta, ochenta, noventa, ¡cien! Diez decenas forman una placa cuadrada. Se llama centena, y vale cien.',
+  html:()=>`<div class="counter" id="cnt"></div><div id="row" style="display:flex;gap:0"></div><div id="res" style="display:none" class="grow">${svgPlate(200)}<div class="lbl tc">1 centena = 100</div></div>`,
+  run(){for(let i=1;i<=10;i++)lt(()=>{$('row').insertAdjacentHTML('beforeend',`<span class="pop" style="line-height:0">${svgBar(20)}</span>`);$('cnt').textContent=i*10},500+i*520);
+    lt(()=>$('row').classList.add('fadeout'),6000);lt(()=>{$('row').style.display='none';$('res').style.display='block'},6400)},
+  p:'<b class="d">10 decenas</b> forman <b class="c">1 centena</b>. ¡La centena vale <b class="c">100</b>!'},
+ {t:'10 centenas = 1 millar',
+  say:'¿Y si apilamos diez centenas, una encima de otra? Cien, doscientos, trescientos, cuatrocientos, quinientos, seiscientos, setecientos, ochocientos, novecientos, ¡mil! Diez centenas forman un cubo grande. Se llama millar, y vale mil.',
+  html:()=>`<div class="counter" id="cnt"></div><div id="row" style="position:relative;width:180px;height:230px"></div><div id="res" style="display:none" class="grow" style="margin-top:28px">${svgCube(165)}<div class="lbl tm">1 millar = 1,000</div></div>`,
+  run(){for(let i=1;i<=10;i++)lt(()=>{$('row').insertAdjacentHTML('beforeend',`<span class="pop" style="position:absolute;left:0;bottom:${(i-1)*17}px;line-height:0">${svgSlab(180)}</span>`);$('cnt').textContent=f(i*100)},600+i*600);
+    lt(()=>$('row').classList.add('fadeout'),7000);lt(()=>{$('row').style.display='none';$('res').style.display='block'},7400)},
+  p:'<b class="c">10 centenas</b> forman <b class="m">1 millar</b>. ¡El millar vale <b class="m">1,000</b>!'},
+ {t:'La casa de los números',
+  say:()=>`Cada número vive en una casa con cuatro cuartos. De derecha a izquierda: unidades, decenas, centenas y millares. Mira el número ${enPalabras(pvNum)}. Tiene ${String(pvNum)[0]} millares, ${String(pvNum)[1]} centenas, ${String(pvNum)[2]} decenas y ${String(pvNum)[3]} unidades. Toca otro número para ver más ejemplos.`,
+  html:()=>`<div style="width:100%"><div class="bnum" style="font-size:clamp(44px,12vw,64px)">${f(pvNum)}</div><div class="bwords">${enPalabras(pvNum)}</div>${pvTable(pvNum)}<div class="sum"><span class="tm">${f(Math.floor(pvNum/1000)*1000)}</span>+<span class="tc">${Math.floor(pvNum%1000/100)*100}</span>+<span class="td">${Math.floor(pvNum%100/10)*10}</span>+<span class="tu">${pvNum%10}</span> = ${f(pvNum)}</div><button class="listen" id="otro">🎲 Otro número</button></div>`,
+  run(){$('otro').onclick=()=>{pvNum=ex1();renderSlide(true)}},
+  p:'El lugar de cada cifra dice cuánto vale. ¡El mismo <b>3</b> vale distinto en cada cuarto!'},
+ {t:'¿Cuánto vale cada cifra?',
+  say:'Mira este número: tres mil trescientos treinta y tres. ¡Todas las cifras son tres! Pero no valen lo mismo. El tres de las unidades vale tres. El de las decenas vale treinta. El de las centenas vale trescientos. Y el de los millares vale tres mil. El lugar lo cambia todo.',
+  html:()=>`<div style="width:100%">${pvTable(3333)}<div class="sum"><span class="tm">3,000</span>+<span class="tc">300</span>+<span class="td">30</span>+<span class="tu">3</span> = 3,333</div></div>`,
+  p:'Cuanto más a la <b>izquierda</b> está una cifra, <b>más vale</b>.'},
+ {t:'¡Con dinero es igual!',
+  say:'Con el dinero pasa lo mismo. Una moneda de un peso es como una unidad. La moneda de diez es como una decena. El billete de cien es como una centena. Y el billete de mil es como un millar. Aquí hay dos mil trescientos quince pesos: dos billetes de mil, tres de cien, una moneda de diez y cinco monedas de un peso.',
+  html:()=>`<div style="width:100%"><div class="fam" style="margin-bottom:12px"><div><div class="money bill b1000">$1000</div>Millar</div><div><div class="money bill b100">$100</div>Centena</div><div><div class="money coin">$10</div>Decena</div><div><div class="money coin" style="width:40px;height:40px;font-size:15px">$1</div>Unidad</div></div>
+   ${money([1000,1000,100,100,100,10])}<div class="visual">${'<div class="money coin" style="width:40px;height:40px;font-size:15px">$1</div>'.repeat(5)}</div><div class="sum">= $2,315</div></div>`,
+  p:'<b class="m">2</b> de $1000, <b class="c">3</b> de $100, <b class="d">1</b> de $10 y <b class="u">5</b> de $1 = <b>$2,315</b>'},
+ {t:'El cero guarda el lugar',
+  say:'¿Y el cero? El cero significa que en ese cuarto no hay nada. Pero es muy importante, porque guarda el lugar. Mira: dos mil cuarenta y cinco tiene cero centenas. Si quitamos el cero, se convierte en doscientos cuarenta y cinco, ¡que es mucho menos!',
+  html:()=>`<div style="width:100%"><div class="bnum" style="font-size:clamp(40px,11vw,60px)">2,045</div>${pvTable(2045,false)}<div class="sum" style="margin-top:14px">Sin el cero: <span style="text-decoration:line-through;color:var(--bad)">2,045</span> → 245 😱</div></div>`,
+  p:'El <b>0</b> dice "aquí no hay ninguno", pero <b>no se puede quitar</b>.'},
+ {t:'¡Ahora construye tú!',
+  say:'Ahora te toca a ti. Usa los botones de más y menos para armar números con bloques. Toca el botón de reto para que te ponga un número y trata de formarlo.',
+  html:()=>builderHTML(),run(){wireBuilder()},
+  p:''},
+];
+function builderHTML(){const n=bld.m*1000+bld.c*100+bld.d*10+bld.u;const k=[['m','Millares'],['c','Centenas'],['d','Decenas'],['u','Unidades']];
+  const blocks=`${Array(bld.m).fill(svgCube(54)).join('')}${Array(bld.c).fill(svgPlate(44)).join('')}${Array(bld.d).fill(svgBar(6)).join('')}${Array(bld.u).fill(svgUnit(9)).join('')}`;
+  return `<div class="builder"><div class="bnum">${f(n)}</div><div class="bwords">${enPalabras(n)}</div>
+   <div class="bcols">${k.map(([x,nm])=>`<div class="bcol b${x}"><div class="nm">${nm}</div><button data-k="${x}" data-v="1">+</button><div class="dg">${bld[x]}</div><button data-k="${x}" data-v="-1">−</button></div>`).join('')}</div>
+   <div class="bblocks">${blocks||'<span style="color:var(--muted)">Toca + para agregar bloques</span>'}</div>
+   <div class="goal ${goal!==null&&goal===n?'done':''}">${goal===null?'':goal===n?`🎉 ¡Lo lograste! Formaste ${f(goal)}`:`🎯 Reto: forma el <span style="font-size:26px">${f(goal)}</span>`}<button id="gbtn">${goal===null?'🎯 Dame un reto':'Otro reto'}</button></div></div>`}
+function wireBuilder(){
+  document.querySelectorAll('.bcol button').forEach(b=>b.addEventListener('pointerdown',e=>{e.preventDefault();const k=b.dataset.k;bld[k]=Math.max(0,Math.min(9,bld[k]+Number(b.dataset.v)));
+    const n=bld.m*1000+bld.c*100+bld.d*10+bld.u;$('stage').innerHTML=builderHTML();wireBuilder();
+    if(goal!==null&&goal===n){beep(true);confetti();say('¡Muy bien! Formaste '+enPalabras(n))}else say(enPalabras(n))}));
+  $('gbtn').onclick=()=>{goal=R(1,9)*1000+R(0,9)*100+R(0,9)*10+R(0,9);bld={m:0,c:0,d:0,u:0};$('stage').innerHTML=builderHTML();wireBuilder();say('Forma el número '+enPalabras(goal))}}
+
+let si=0;
+function renderSlide(keepVoice){lclear();const s=SLIDES[si];
+  $('slide').innerHTML=`<h2>${s.t}</h2><div class="stage" id="stage">${s.html()}</div>${s.p?`<p>${s.p}</p>`:''}<button class="listen" id="relisten">🔊 Escuchar otra vez</button>
+   ${si===SLIDES.length-1?`<button class="btn" id="toPractice" style="margin:12px auto 0">¡A practicar! ✏️</button>`:''}`;
+  $('lDots').innerHTML=SLIDES.map((_,i)=>`<i class="${i===si?'on':''}"></i>`).join('');
+  $('lPrev').disabled=si===0;$('lNext').disabled=si===SLIDES.length-1;
+  const txt=typeof s.say==='function'?s.say():s.say;
+  $('relisten').onclick=()=>{if(!voiceOn){voiceOn=true;updSound()}renderSlide()};
+  if($('toPractice'))$('toPractice').onclick=()=>{hush();start('valor')};
+  if(s.run)s.run();say(txt)}
+function updSound(){$('lSound').textContent=voiceOn?'🔊':'🔇';try{localStorage.setItem('mate3_voice',voiceOn?'1':'0')}catch(e){}}
+$('learnGo').onclick=()=>{si=0;show('learn');updSound();renderSlide()};
+$('lPrev').onclick=()=>{if(si>0){si--;renderSlide()}};
+$('lNext').onclick=()=>{if(si<SLIDES.length-1){si++;renderSlide()}};
+$('lBack').onclick=()=>{lclear();hush();renderMenu();show('menu')};
+$('lSound').onclick=()=>{voiceOn=!voiceOn;updSound();if(!voiceOn)hush();else renderSlide()};
 renderMenu();
 try{if('serviceWorker' in navigator&&location.protocol==='https:'&&location.hostname.endsWith('github.io'))navigator.serviceWorker.register('sw.js')}catch(e){}
 </script>
