@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>¡A practicar mate!</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#6C63FF">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Mate">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FFF8EC; --ink:#2B2A4C; --muted:#7A7896; --card:#FFFFFF;
+    --c1:#FF6B6B; --c2:#4ECDC4; --c3:#FFB703; --c4:#6C63FF; --c5:#2EC4B6; --c6:#F15BB5; --c7:#00A6FB; --c8:#8AC926;
+    --ok:#2BB673; --bad:#E5484D; --radius:22px;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;height:100%}
+  body{font-family:'Baloo 2',Arial,sans-serif;background:var(--bg);color:var(--ink);
+    background-image:radial-gradient(circle at 10% 10%,#FFE3B3 0 60px,transparent 61px),radial-gradient(circle at 90% 85%,#D7F5F2 0 90px,transparent 91px);
+    background-attachment:fixed;user-select:none}
+  .wrap{max-width:760px;margin:0 auto;padding:16px 16px 40px;min-height:100%}
+  header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px}
+  h1{font-size:clamp(26px,6vw,38px);margin:0;line-height:1.05;font-weight:800}
+  h1 span{color:var(--c4)}
+  .stars{background:var(--card);border-radius:999px;padding:6px 14px;font-size:20px;font-weight:700;box-shadow:0 3px 0 #0001;white-space:nowrap}
+  .sub{color:var(--muted);margin:0 0 16px;font-size:18px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px}
+  .tile{border:0;border-radius:var(--radius);padding:16px 12px;color:#fff;font-family:inherit;text-align:left;cursor:pointer;
+    box-shadow:0 6px 0 #0002;transition:transform .08s;min-height:120px;display:flex;flex-direction:column;justify-content:space-between}
+  .tile:active{transform:translateY(4px);box-shadow:0 2px 0 #0002}
+  .tile .ico{font-size:34px;line-height:1}
+  .tile .t{font-size:21px;font-weight:800;line-height:1.1;margin-top:8px}
+  .tile .s{font-size:14px;opacity:.95}
+  .tile .best{font-size:15px;margin-top:4px}
+  .section-t{font-size:20px;font-weight:800;margin:22px 4px 10px}
+  /* lightning */
+  .flash{background:linear-gradient(135deg,#2B2A4C,#4b43c9);border-radius:26px;padding:16px;color:#fff;display:flex;gap:14px;align-items:center;flex-wrap:wrap;box-shadow:0 6px 0 #0003}
+  .flash .ico{font-size:48px}
+  .flash .info{flex:1;min-width:180px}
+  .flash .t{font-size:24px;font-weight:800;line-height:1.1}
+  .flash .s{font-size:15px;opacity:.85}
+  .chips{display:flex;gap:8px;margin-top:8px;align-items:center;flex-wrap:wrap}
+  .chip{border:0;border-radius:999px;padding:4px 14px;font-family:inherit;font-weight:800;font-size:17px;background:#ffffff26;color:#fff;cursor:pointer}
+  .chip.on{background:var(--c3);color:#2B2A4C}
+  .flash .go{border:0;border-radius:18px;font-family:inherit;font-weight:800;font-size:22px;padding:10px 24px;background:var(--c3);color:#2B2A4C;box-shadow:0 5px 0 #b98300;cursor:pointer}
+  /* Practice screen */
+  .top{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+  .back{border:0;background:var(--card);border-radius:14px;font-size:22px;padding:6px 14px;font-family:inherit;cursor:pointer;box-shadow:0 3px 0 #0001}
+  .bar{flex:1;height:16px;background:#0000000f;border-radius:999px;overflow:hidden}
+  .bar i{display:block;height:100%;background:var(--c4);border-radius:999px;transition:width .3s}
+  .count{font-weight:700;font-size:18px;min-width:52px;text-align:right}
+  .card{background:var(--card);border-radius:28px;padding:22px 18px;box-shadow:0 8px 0 #00000012;text-align:center;position:relative}
+  .topic{font-size:15px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+  .q{font-size:clamp(21px,5vw,29px);font-weight:700;line-height:1.25;margin:8px 0 6px}
+  .big{font-size:clamp(40px,11vw,64px);font-weight:800;letter-spacing:2px;margin:6px 0}
+  .vertical{display:inline-block;text-align:right;font-size:clamp(36px,9.5vw,54px);font-weight:800;line-height:1.1;font-variant-numeric:tabular-nums;margin:6px 0;padding:0 10px}
+  .vertical .op{border-bottom:5px solid var(--ink);padding-bottom:2px}
+  .visual{margin:10px auto;display:flex;flex-wrap:wrap;justify-content:center;gap:6px;align-items:center}
+  .money{display:inline-flex;align-items:center;justify-content:center;font-weight:800;color:#5a3b00}
+  .coin{width:54px;height:54px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#FFE8A3,#E0A800);border:3px solid #B88A00;font-size:18px}
+  .bill{width:92px;height:50px;border-radius:8px;border:3px solid #2a7a4a;background:linear-gradient(135deg,#BDF0C9,#7FD69A);color:#145a31;font-size:20px}
+  .bill.b50{background:linear-gradient(135deg,#F9C6E3,#E88BBE);border-color:#a3437a;color:#6b1d4b}
+  .bill.b100{background:linear-gradient(135deg,#FFD0B0,#F49A6A);border-color:#b5562a;color:#6a2a0b}
+  .bill.b200{background:linear-gradient(135deg,#CDE7B0,#9CCB6A);border-color:#557a2a;color:#2f4d10}
+  .bill.b500{background:linear-gradient(135deg,#D9D0F5,#A897E3);border-color:#5b48a8;color:#2e2066}
+  .bill.b20{background:linear-gradient(135deg,#C6DBFF,#8DB4F5);border-color:#3c63a8;color:#1b3566}
+  .emojis{font-size:28px;line-height:1.3;letter-spacing:2px}
+  .series{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:10px 0}
+  .series span{background:#F4F1FF;border-radius:14px;padding:4px 12px;font-size:clamp(22px,5.5vw,32px);font-weight:800}
+  .series span.qm{background:#FFF0C2;color:#b07a00}
+  .rect{margin:12px auto;position:relative;display:inline-block}
+  .rect .box{background:#D7F5F2;border:4px solid var(--c5);border-radius:6px}
+  .rect .w{position:absolute;left:0;right:0;top:-30px;font-weight:800;font-size:22px}
+  .rect .h{position:absolute;top:50%;right:-62px;transform:translateY(-50%);font-weight:800;font-size:22px}
+  .frac{display:inline-flex;flex-direction:column;align-items:center;line-height:1;vertical-align:middle;margin:0 4px}
+  .frac b{display:block;padding:0 4px}
+  .frac b:first-child{border-bottom:3px solid currentColor;padding-bottom:2px}
+  /* timer */
+  .timer{display:none;margin:4px auto 8px;max-width:420px}
+  .timer .tb{height:14px;background:#0000000f;border-radius:999px;overflow:hidden}
+  .timer .tb i{display:block;height:100%;width:100%;background:var(--c3);border-radius:999px}
+  .timer .tn{font-size:20px;font-weight:800;color:#b07a00}
+  .timer.low .tb i{background:var(--bad)} .timer.low .tn{color:var(--bad)}
+  /* answer */
+  .answer{margin:14px auto 6px;min-height:72px;min-width:170px;display:inline-flex;align-items:center;justify-content:center;
+    border:4px dashed #CFCBE8;border-radius:20px;font-size:44px;font-weight:800;padding:0 20px;background:#FBFAFF}
+  .answer.ok{border:4px solid var(--ok);background:#E8F8EF;color:var(--ok)}
+  .answer.bad{border:4px solid var(--bad);background:#FDECEC;color:var(--bad);animation:shake .35s}
+  @keyframes shake{25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+  .pad{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:420px;margin:14px auto 0}
+  .pad button,.choices button{border:0;border-radius:18px;font-family:inherit;font-weight:800;cursor:pointer;color:var(--ink);background:#EEF0FF;box-shadow:0 5px 0 #C9CCEB;touch-action:manipulation}
+  .pad button{font-size:32px;padding:10px 0}
+  .pad button:active,.choices button:active{transform:translateY(3px);box-shadow:0 2px 0 #C9CCEB}
+  .pad .del{background:#FFE7E7;box-shadow:0 5px 0 #F2C0C0}
+  .pad .go{background:var(--ok);color:#fff;box-shadow:0 5px 0 #1e8a56}
+  .choices{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px;max-width:520px;margin:16px auto 0}
+  .choices button{font-size:28px;padding:14px 8px}
+  .choices button.ok{background:var(--ok);color:#fff;box-shadow:0 5px 0 #1e8a56}
+  .choices button.bad{background:var(--bad);color:#fff;box-shadow:0 5px 0 #a82b2f}
+  .fb{min-height:30px;font-size:21px;font-weight:700;margin-top:12px}
+  .fb.ok{color:var(--ok)} .fb.bad{color:var(--bad)}
+  .explain{background:#FFF6DD;border-radius:16px;padding:10px 14px;margin-top:10px;font-size:19px;text-align:left;display:none}
+  .next{display:none;margin:16px auto 0;border:0;background:var(--c4);color:#fff;font-family:inherit;font-weight:800;font-size:24px;border-radius:18px;padding:12px 34px;box-shadow:0 5px 0 #4b43c9;cursor:pointer}
+  .result{text-align:center}
+  .result .emoji{font-size:80px;line-height:1}
+  .result h2{font-size:34px;margin:6px 0}
+  .result .rs{font-size:46px;letter-spacing:6px}
+  .btnrow{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:18px}
+  .btn{border:0;border-radius:18px;font-family:inherit;font-weight:800;font-size:22px;padding:12px 26px;cursor:pointer;color:#fff;background:var(--c4);box-shadow:0 5px 0 #4b43c9}
+  .btn.alt{background:var(--c2);box-shadow:0 5px 0 #219a92}
+  .hide{display:none!important}
+  .confetti{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:9}
+  .confetti i{position:absolute;top:-20px;width:12px;height:18px;border-radius:3px;animation:fall 1.6s linear forwards}
+  @keyframes fall{to{transform:translateY(110vh) rotate(720deg)}}
+  .foot{color:var(--muted);text-align:center;font-size:14px;margin-top:24px}
+  .reset{background:none;border:0;color:var(--muted);text-decoration:underline;font-family:inherit;font-size:14px;cursor:pointer}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- MENU -->
+  <div id="menu">
+    <header>
+      <h1>¡A practicar <span>mate!</span></h1>
+      <div class="stars" id="totalStars">⭐ 0</div>
+    </header>
+    <p class="sub">3.º de primaria · Elige un tema. Cada ronda tiene 10 ejercicios.</p>
+
+    <div class="flash">
+      <div class="ico">⚡</div>
+      <div class="info">
+        <div class="t">Tablas relámpago</div>
+        <div class="s">Tablas revueltas del 2 al 10 contra reloj</div>
+        <div class="chips"><span style="font-weight:700">Tiempo:</span>
+          <button class="chip" data-s="3">3 s</button><button class="chip" data-s="5">5 s</button><button class="chip" data-s="8">8 s</button>
+          <span id="flashBest" style="margin-left:6px"></span></div>
+      </div>
+      <button class="go" id="flashGo">¡Jugar!</button>
+    </div>
+
+    <div id="sections"></div>
+    <div class="foot">Basado en el cuaderno de Refuerzo y ampliación de Matemáticas, con nivel de 3.º de primaria.<br>
+      <button class="reset" id="resetBtn">Borrar estrellas</button></div>
+  </div>
+
+  <!-- PRACTICE -->
+  <div id="practice" class="hide">
+    <div class="top">
+      <button class="back" id="backBtn" aria-label="Volver">←</button>
+      <div class="bar"><i id="barFill" style="width:0%"></i></div>
+      <div class="count" id="count">1/10</div>
+    </div>
+    <div class="card">
+      <div class="topic" id="qTopic"></div>
+      <div class="timer" id="timer"><div class="tn" id="tn">3</div><div class="tb"><i id="tbar"></i></div></div>
+      <div id="qBody"></div>
+      <div id="answerWrap"></div>
+      <div class="fb" id="fb"></div>
+      <div class="explain" id="explain"></div>
+      <button class="next" id="nextBtn">Siguiente →</button>
+    </div>
+  </div>
+
+  <!-- RESULT -->
+  <div id="result" class="hide">
+    <div class="card result">
+      <div class="emoji" id="rEmoji">🎉</div>
+      <h2 id="rTitle">¡Muy bien!</h2>
+      <div class="rs" id="rStars"></div>
+      <p class="q" id="rScore"></p>
+      <div class="btnrow">
+        <button class="btn" id="againBtn">Otra vez</button>
+        <button class="btn alt" id="homeBtn">Temas</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="confetti" id="confetti"></div>
+
+<script>
+/* ---------- helpers ---------- */
+const R=(a,b)=>Math.floor(Math.random()*(b-a+1))+a;
+const pick=a=>a[Math.floor(Math.random()*a.length)];
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=R(0,i);[a[i],a[j]]=[a[j],a[i]]}return a};
+const f=n=>Number(n).toLocaleString('es-MX');
+const names=['Sofía','Mateo','Valentina','Santiago','Regina','Diego','Ximena','Emiliano','Camila','Leonardo','Renata','Iker','Lucía','Andrés','Paula'];
+const items=[['canicas','🔵'],['estampas','🃏'],['dulces','🍬'],['lápices','✏️'],['galletas','🍪'],['flores','🌸'],['conchas','🐚'],['globos','🎈'],['manzanas','🍎'],['peces','🐟']];
+const uniq=a=>[...new Set(a.map(String))];
+const vert=(a,b,op)=>`<div class="vertical">${a}<br><span class="op">${op} ${b}</span></div>`;
+const fr=(n,d)=>`<span class="frac"><b>${n}</b><b>${d}</b></span>`;
+function money(list){return `<div class="visual">${list.map(v=>v>=20?`<div class="money bill b${v}">$${v}</div>`:`<div class="money coin">$${v}</div>`).join('')}</div>`}
+function pie(n,d){const r=70,c=80;let s=`<svg width="160" height="160" viewBox="0 0 160 160">`;
+  for(let i=0;i<d;i++){const a0=i/d*2*Math.PI-Math.PI/2,a1=(i+1)/d*2*Math.PI-Math.PI/2;
+    const x0=c+r*Math.cos(a0),y0=c+r*Math.sin(a0),x1=c+r*Math.cos(a1),y1=c+r*Math.sin(a1);
+    s+=`<path d="M${c},${c} L${x0},${y0} A${r},${r} 0 ${a1-a0>Math.PI?1:0} 1 ${x1},${y1} Z" fill="${i<n?'#F15BB5':'#FFF'}" stroke="#2B2A4C" stroke-width="3"/>`}
+  return `<div class="visual">${s}</svg></div>`}
+function barFrac(n,d){let s='';for(let i=0;i<d;i++)s+=`<div style="width:${Math.min(44,260/d)}px;height:54px;border:3px solid #2B2A4C;margin-left:-3px;background:${i<n?'#00A6FB':'#fff'}"></div>`;return `<div class="visual" style="gap:0">${s}</div>`}
+function clock(h,m){const c=90;let s=`<svg width="180" height="180" viewBox="0 0 180 180"><circle cx="${c}" cy="${c}" r="84" fill="#fff" stroke="#2B2A4C" stroke-width="6"/>`;
+  for(let i=1;i<=12;i++){const a=i/12*2*Math.PI-Math.PI/2;s+=`<text x="${c+66*Math.cos(a)}" y="${c+66*Math.sin(a)+7}" text-anchor="middle" font-size="20" font-weight="800" fill="#2B2A4C" font-family="Baloo 2,Arial">${i}</text>`}
+  for(let i=0;i<60;i++){if(i%5)continue;}
+  const ha=((h%12)+m/60)/12*2*Math.PI-Math.PI/2,ma=m/60*2*Math.PI-Math.PI/2;
+  s+=`<line x1="${c}" y1="${c}" x2="${c+40*Math.cos(ha)}" y2="${c+40*Math.sin(ha)}" stroke="#E5484D" stroke-width="8" stroke-linecap="round"/>`;
+  s+=`<line x1="${c}" y1="${c}" x2="${c+62*Math.cos(ma)}" y2="${c+62*Math.sin(ma)}" stroke="#2B2A4C" stroke-width="5" stroke-linecap="round"/><circle cx="${c}" cy="${c}" r="6" fill="#2B2A4C"/></svg>`;
+  return `<div class="visual">${s}</div>`}
+const hm=(h,m)=>`${h}:${String(m).padStart(2,'0')}`;
+const digits=n=>String(n).split('').map(Number);
+
+/* ---------- generators: {q, html?, a, choices?, explain, unit?} ---------- */
+const G={
+  // NÚMEROS
+  valor(){const n=R(1000,9999);const d=digits(n);const t=R(0,3);
+    const nom=['millares','centenas','decenas','unidades'],val=[1000,100,10,1];
+    if(t===0){const p=R(0,3);return{q:`En el número <b>${f(n)}</b>, ¿cuántas <b>${nom[p]}</b> hay en esa posición?`,a:d[p],explain:`${f(n)} = ${d[0]} millares, ${d[1]} centenas, ${d[2]} decenas y ${d[3]} unidades`}}
+    if(t===1){let p;do{p=R(0,2)}while(d[p]===0);return{q:`¿Cuánto vale el <b>${d[p]}</b> que está en las ${nom[p]} de <b>${f(n)}</b>?`,a:d[p]*val[p],explain:`Está en las ${nom[p]}: ${d[p]} × ${f(val[p])} = ${f(d[p]*val[p])}`}}
+    if(t===2)return{q:`¿Qué número es <b>${d[0]} millares, ${d[1]} centenas, ${d[2]} decenas y ${d[3]} unidades</b>?`,a:n,explain:`${f(d[0]*1000)} + ${d[1]*100} + ${d[2]*10} + ${d[3]} = ${f(n)}`};
+    return{q:`Completa: <b>${f(d[0]*1000)} + ${d[1]*100} + ${d[2]*10} + ${d[3]}</b> = ?`,a:n,explain:`Juntamos millares, centenas, decenas y unidades: ${f(n)}`}},
+  series(){const step=pick([10,100,1000,5,25,50,20,200]);const down=R(0,3)===0;const start=down?R(4,9)*1000+R(0,9)*step%1000:R(1,6)*1000+R(0,9)*10;
+    const s=[0,1,2,3,4].map(i=>down?start-i*step:start+i*step);const hole=R(2,4);
+    return{q:`¿Qué número falta en la serie?`,html:`<div class="series">${s.map((v,i)=>i===hole?'<span class="qm">?</span>':`<span>${f(v)}</span>`).join('')}</div>`,a:s[hole],explain:`La serie va ${down?'bajando':'subiendo'} de ${step} en ${step}.`}},
+  anterior(){const n=R(1000,9998);const t=R(0,3);
+    if(t===0)return{q:`¿Cuál es el número <b>posterior</b> a <b>${f(n)}</b>?`,a:n+1,explain:`Después de ${f(n)} viene ${f(n+1)}`};
+    if(t===1)return{q:`¿Cuál es el número <b>anterior</b> a <b>${f(n)}</b>?`,a:n-1,explain:`Antes de ${f(n)} va ${f(n-1)}`};
+    const m=R(1,8)*1000+R(0,9)*100;if(t===2)return{q:`¿Qué número va <b>después</b> de <b>${f(m-1)}</b>?`,a:m,explain:`${f(m-1)} + 1 = ${f(m)}`};
+    return{q:`¿Qué número va <b>antes</b> de <b>${f(m)}</b>?`,a:m-1,explain:`${f(m)} − 1 = ${f(m-1)}`}},
+  comparar(){let a=R(1000,9999),b;const t=R(0,4);
+    if(t===0)b=a;else if(t===1)b=Math.floor(a/10)*10+R(0,9);else if(t===2)b=Math.floor(a/100)*100+R(0,99);else if(t===3)b=Math.floor(a/1000)*1000+R(0,999);else b=R(100,999);
+    if(R(0,1))[a,b]=[b,a];const s=a>b?'>':a<b?'<':'=';
+    return{q:'¿Qué signo va en medio?',html:`<div class="big" style="font-size:clamp(32px,9vw,54px)">${f(a)} &nbsp;?&nbsp; ${f(b)}</div>`,a:s,choices:['<','=','>'],explain:a===b?'Son iguales.':`Compara de izquierda a derecha: millares, centenas, decenas… ${f(a)} es ${a>b?'mayor':'menor'} que ${f(b)}.`}},
+  redondeo(){const t=R(0,1);
+    if(t===0){let n;do{n=R(101,999)}while(n%10===5||n%10===0);const r=Math.round(n/10)*10,lo=Math.floor(n/10)*10;return{q:`Redondea <b>${n}</b> a la <b>decena</b> más cercana`,a:r,choices:shuffle(uniq([lo,lo+10,Math.round(n/100)*100===lo||Math.round(n/100)*100===lo+10?lo+20:Math.round(n/100)*100])).map(Number),explain:`${n} está entre ${lo} y ${lo+10}; está más cerca de ${r}.`}}
+    let n;do{n=R(1010,9990)}while(n%100===50||n%100===0);const r=Math.round(n/100)*100,lo=Math.floor(n/100)*100;
+    return{q:`Redondea <b>${f(n)}</b> a la <b>centena</b> más cercana`,a:r,choices:shuffle(uniq([lo,lo+100,Math.round(n/10)*10===lo?lo+200:Math.round(n/10)*10])).map(Number),explain:`${f(n)} está entre ${f(lo)} y ${f(lo+100)}; está más cerca de ${f(r)}.`}},
+  // SUMAS
+  suma3(){let a,b;do{a=R(150,799);b=R(120,999-a)}while(b<100||(a%10)+(b%10)<10);return{q:'Resuelve la suma',html:vert(a,b,'+'),a:a+b,explain:`Suma unidades, decenas y centenas; cuando pasas de 9, llevas 1 a la siguiente columna. ${a} + ${b} = ${a+b}`}},
+  suma4(){const a=R(1200,6999),b=R(800,9999-a);return{q:'Resuelve la suma',html:vert(f(a),f(b),'+'),a:a+b,explain:`Columna por columna, de derecha a izquierda, sin olvidar lo que llevas. ${f(a)} + ${f(b)} = ${f(a+b)}`}},
+  sumaTres(){const a=R(100,400),b=R(50,300),c=R(20,99);return{q:'Suma los tres números',html:`<div class="vertical">${a}<br>${b}<br><span class="op">+ ${c}</span></div>`,a:a+b+c,explain:`${a} + ${b} = ${a+b}; ${a+b} + ${c} = ${a+b+c}`}},
+  // RESTAS
+  resta3(){let a,b;do{a=R(300,999);b=R(110,a-20)}while((b%10)<=(a%10));return{q:'Resuelve la resta',html:vert(a,b,'−'),a:a-b,explain:`Cuando arriba hay menos, pides prestado a la columna de la izquierda. ${a} − ${b} = ${a-b}. Comprueba: ${a-b} + ${b} = ${a}`}},
+  resta4(){const a=R(2000,9999),b=R(500,a-100);return{q:'Resuelve la resta',html:vert(f(a),f(b),'−'),a:a-b,explain:`${f(a)} − ${f(b)} = ${f(a-b)}. Comprueba: ${f(a-b)} + ${f(b)} = ${f(a)}`}},
+  restaCeros(){const a=pick([100,200,300,500,1000,2000,3000,5000,1005,2004,4000]);const b=R(Math.floor(a/5),a-11);return{q:'Resta con ceros (¡con cuidado!)',html:vert(f(a),f(b),'−'),a:a-b,explain:`Con ceros arriba, pides prestado hasta encontrar un número que no sea cero. ${f(a)} − ${f(b)} = ${f(a-b)}`}},
+  falta(){const a=R(120,600),b=R(100,399),c=a+b;const t=R(0,2);
+    if(t===0)return{q:`Completa: <b>${a} + ? = ${c}</b>`,a:b,explain:`Para encontrarlo, resta: ${c} − ${a} = ${b}`};
+    if(t===1)return{q:`Completa: <b>? − ${b} = ${a}</b>`,a:c,explain:`Para encontrarlo, suma: ${a} + ${b} = ${c}`};
+    return{q:`Completa: <b>${c} − ? = ${a}</b>`,a:b,explain:`${c} − ${a} = ${b}`}},
+  mental(){const t=R(0,3);
+    if(t===0){const a=R(10,90)*10,b=R(1,9)*100;return{q:'Cálculo mental',html:`<div class="big">${a} + ${b}</div>`,a:a+b,explain:`Suma las centenas: ${a} + ${b} = ${a+b}`}}
+    if(t===1){const a=R(2,9)*1000+R(1,9)*100,b=pick([100,1000,10]);return{q:'Cálculo mental',html:`<div class="big">${f(a)} − ${f(b)}</div>`,a:a-b,explain:`Quita ${f(b)}: ${f(a)} − ${f(b)} = ${f(a-b)}`}}
+    if(t===2){const a=R(11,89),b=pick([9,19,29,99]);return{q:'Cálculo mental',html:`<div class="big">${a} + ${b}</div>`,a:a+b,explain:`Truco: suma ${b+1} y quita 1 → ${a+b+1} − 1 = ${a+b}`}}
+    const a=R(2,9)*100,b=R(2,9)*100;return{q:'Cálculo mental',html:`<div class="big">${a} + ${b}</div>`,a:a+b,explain:`${a/100} + ${b/100} = ${(a+b)/100} centenas → ${a+b}`}},
+  // MULTIPLICACIÓN
+  tabla(t){return()=>{const tt=t==='mix'?R(2,10):t;const k=R(1,10);return{q:'¿Cuánto es?',html:`<div class="big">${tt} × ${k}</div>`,a:tt*k,explain:`${tt} × ${k} = ${tt*k}`}}},
+  x10(){const n=R(2,99);const m=pick([10,100,10,100,1000]);if(m===1000&&n>9)return G.x10();return{q:'¿Cuánto es?',html:`<div class="big">${n} × ${f(m)}</div>`,a:n*m,explain:`Multiplicar por ${f(m)} es agregar ${String(m).length-1} cero${m>10?'s':''}: ${f(n*m)}`}},
+  mult2(){let a,b;do{a=R(12,99);b=R(2,9)}while((a%10)*b<10);return{q:'Resuelve la multiplicación',html:vert(a,b,'×'),a:a*b,explain:`${b}×${a%10}=${(a%10)*b}: escribes ${(a%10)*b%10} y llevas ${Math.floor((a%10)*b/10)}. ${b}×${Math.floor(a/10)}=${Math.floor(a/10)*b}, más ${Math.floor((a%10)*b/10)} = ${Math.floor(a/10)*b+Math.floor((a%10)*b/10)}. Resultado ${a*b}.`}},
+  mult3(){const a=R(102,499),b=R(2,9);return{q:'Resuelve la multiplicación',html:vert(a,b,'×'),a:a*b,explain:`Multiplica ${b} por unidades, decenas y centenas, sumando lo que llevas. ${a} × ${b} = ${f(a*b)}`}},
+  // DIVISIÓN
+  division(){const d=R(2,10),q=R(2,10);return{q:'¿Cuánto es?',html:`<div class="big">${d*q} ÷ ${d}</div>`,a:q,explain:`Busca en la tabla del ${d}: ${d} × ${q} = ${d*q}, así que ${d*q} ÷ ${d} = ${q}`}},
+  residuo(){const d=R(2,9),q=R(2,9),r=R(1,d-1),n=d*q+r;const e=pick(items);const nm=pick(names);const t=R(0,1);
+    return{q:`${nm} reparte <b>${n} ${e[0]}</b> entre <b>${d}</b> amigos en partes iguales. ${t?'¿Cuántos le tocan a cada uno?':'¿Cuántos <b>sobran</b>?'}`,html:`<div class="emojis">${e[1].repeat(n)}</div>`,a:t?q:r,explain:`${d} × ${q} = ${d*q}; ${n} − ${d*q} = ${r}. A cada uno le tocan ${q} y sobran ${r}.`}},
+  dobleMitad(){const t=R(0,3);
+    if(t===0){const n=R(15,250);return{q:`¿Cuál es el <b>doble</b> de <b>${n}</b>?`,a:2*n,explain:`${n} × 2 = ${2*n}`}}
+    if(t===1){const n=R(10,90);return{q:`¿Cuál es el <b>triple</b> de <b>${n}</b>?`,a:3*n,explain:`${n} × 3 = ${3*n}`}}
+    if(t===2){const n=R(10,250)*2;return{q:`¿Cuál es la <b>mitad</b> de <b>${n}</b>?`,a:n/2,explain:`${n} ÷ 2 = ${n/2}`}}
+    const n=R(3,40)*4;return{q:`¿Cuál es la <b>cuarta parte</b> de <b>${n}</b>?`,a:n/4,explain:`${n} ÷ 4 = ${n/4} (la mitad de la mitad)`}},
+  // FRACCIONES
+  fracPintada(){const d=pick([2,3,4,5,6,8,10]);const n=R(1,d-1);const vis=R(0,1)?pie(n,d):barFrac(n,d);
+    const wrong=uniq([`${d-n}/${d}`,`${n}/${d+1}`,`${n}/${d-1>n?d-1:d+2}`,`${d}/${n}`]).filter(x=>x!==`${n}/${d}`);
+    return{q:'¿Qué fracción está pintada?',html:vis,a:`${n}/${d}`,choices:shuffle([`${n}/${d}`,...wrong.slice(0,3)]),explain:`Hay ${d} partes iguales (denominador) y ${n} pintada${n>1?'s':''} (numerador): ${n}/${d}`}},
+  fracDe(){const d=pick([2,3,4,5,10]);const n=d===2?1:R(1,d-1);const k=R(2,12);const tot=d*k;
+    return{q:`¿Cuánto es ${fr(n,d)} de <b>${tot}</b>?`,a:n*k,explain:`Divide entre ${d}: ${tot} ÷ ${d} = ${k}${n>1?`; luego multiplica por ${n}: ${k} × ${n} = ${n*k}`:''}.`}},
+  fracComp(){const t=R(0,1);let a,b,c,d;
+    if(t){d=b=pick([4,5,6,8,10]);a=R(1,b-1);c=R(1,d-1)}else{a=c=1;b=R(2,10);d=R(2,10)}
+    const va=a/b,vb=c/d;const s=Math.abs(va-vb)<1e-9?'=':va>vb?'>':'<';
+    return{q:'¿Qué signo va en medio?',html:`<div class="big" style="font-size:clamp(36px,9vw,54px)">${fr(a,b)} &nbsp;?&nbsp; ${fr(c,d)}</div>`,a:s,choices:['<','=','>'],
+      explain:t?'Si tienen el mismo denominador, es mayor la que tiene más partes (numerador más grande).':'Si el numerador es 1, es mayor la que tiene el denominador más chico (las partes son más grandes).'}},
+  // PROBLEMAS
+  problemaSR(){const nm=pick(names);const t=R(0,3);
+    if(t===0){const a=R(250,900),b=R(150,800);return{q:`En una biblioteca hay ${a} libros de cuentos y ${b} de ciencias. ¿Cuántos libros hay en total?`,a:a+b,explain:`En total → suma: ${a} + ${b} = ${f(a+b)}`}}
+    if(t===1){const a=R(400,999),b=R(120,a-50);return{q:`Un tren lleva ${a} pasajeros. En la estación bajan ${b}. ¿Cuántos pasajeros quedan?`,a:a-b,explain:`Bajan → se quita → resta: ${a} − ${b} = ${a-b}`}}
+    if(t===2){const a=R(1200,3000),b=R(a+100,5000);return{q:`${nm} ahorró $${f(a)} y su hermana ahorró $${f(b)}. ¿Cuánto más ahorró la hermana?`,a:b-a,unit:'$',explain:`¿Cuánto más? → resta: ${f(b)} − ${f(a)} = $${f(b-a)}`}}
+    const a=R(1000,2500),b=R(300,900);return{q:`Una pastelería hizo ${f(a)} panes en la mañana y ${b} en la tarde. ¿Cuántos panes hizo en el día?`,a:a+b,explain:`${f(a)} + ${b} = ${f(a+b)}`}},
+  problemaMD(){const nm=pick(names);const t=R(0,3);
+    if(t===0){const c=R(3,9),k=R(12,48);return{q:`Una caja trae ${k} colores. ¿Cuántos colores hay en ${c} cajas?`,a:c*k,explain:`${c} cajas × ${k} = ${c*k}`}}
+    if(t===1){const p=R(3,9),k=R(3,9);return{q:`${nm} tiene ${p*k} estampas y las pega en ${p} páginas, con la misma cantidad en cada una. ¿Cuántas pega en cada página?`,a:k,explain:`${p*k} ÷ ${p} = ${k}`}}
+    if(t===2){const pr=R(12,85),n=R(2,6);return{q:`Una entrada al cine cuesta $${pr}. ¿Cuánto pagan ${n} personas?`,a:pr*n,unit:'$',explain:`$${pr} × ${n} = $${pr*n}`}}
+    const m=R(4,8),k=R(5,9);return{q:`En un salón hay ${m*k} alumnos y se forman equipos de ${m}. ¿Cuántos equipos hay?`,a:k,explain:`${m*k} ÷ ${m} = ${k}`}},
+  problema2(){const nm=pick(names);const t=R(0,3);
+    if(t===0){const c=R(3,8),k=R(6,12),x=R(5,Math.min(20,c*k-5));return{q:`${nm} compró ${c} bolsas con ${k} dulces cada una y regaló ${x}. ¿Cuántos dulces le quedan?`,a:c*k-x,explain:`Primero: ${c} × ${k} = ${c*k}. Después: ${c*k} − ${x} = ${c*k-x}`}}
+    if(t===1){const a=R(25,60),b=R(15,40),pay=500;return{q:`${nm} compra una playera de $${a*2+R(0,1)*10} y un short de $${b*2}. Paga con un billete de $${pay}. ¿Cuánto le dan de cambio?`,_custom:true}}
+    if(t===2){const p=R(3,6),k=R(15,40),e=R(10,50);return{q:`Un granjero tiene ${p} corrales con ${k} gallinas cada uno. Compra ${e} gallinas más. ¿Cuántas gallinas tiene ahora?`,a:p*k+e,explain:`${p} × ${k} = ${p*k}; ${p*k} + ${e} = ${p*k+e}`}}
+    const a=R(300,600),b=R(100,250),c=R(50,150);return{q:`Un estadio tenía ${a} personas. Llegaron ${b} más y se fueron ${c}. ¿Cuántas personas hay ahora?`,a:a+b-c,explain:`${a} + ${b} = ${a+b}; ${a+b} − ${c} = ${a+b-c}`}},
+  // DINERO
+  dinero(){const t=R(0,2);
+    if(t===0){const pool=[1,2,5,10,10,20,50,100,200,500];const k=R(3,6);const l=Array.from({length:k},()=>pick(pool)).sort((a,b)=>b-a);const s=l.reduce((x,y)=>x+y,0);
+      return{q:'¿Cuánto dinero hay en total?',html:money(l),a:s,explain:`${l.join(' + ')} = $${s}`,unit:'$'}}
+    if(t===1){const pr=R(120,480);const pay=500;return{q:`Una mochila cuesta <b>$${pr}</b>. Pagas con un billete de <b>$${pay}</b>. ¿Cuánto te dan de cambio?`,html:money([pay]),a:pay-pr,explain:`${pay} − ${pr} = $${pay-pr}`,unit:'$'}}
+    const a=R(35,150),b=R(20,99),c=R(10,60);return{q:`Compras un libro de <b>$${a}</b>, una libreta de <b>$${b}</b> y una regla de <b>$${c}</b>. ¿Cuánto pagas en total?`,a:a+b+c,explain:`${a} + ${b} + ${c} = $${a+b+c}`,unit:'$'}},
+  // MEDIDAS
+  longitud(){const t=R(0,4);
+    if(t===0){const m=R(2,9),c=R(0,9)*10;return{q:`¿Cuántos centímetros son <b>${m} m ${c?'y '+c+' cm':''}</b>?`,a:m*100+c,explain:`1 m = 100 cm → ${m} m = ${m*100} cm${c?` + ${c} = ${m*100+c} cm`:''}`}}
+    if(t===1){const k=R(1,9);return{q:`¿Cuántos metros son <b>${k} km</b>?`,a:k*1000,explain:`1 km = 1,000 m → ${k} km = ${f(k*1000)} m`}}
+    if(t===2){const c=R(2,30);return{q:`¿Cuántos milímetros son <b>${c} cm</b>?`,a:c*10,explain:`1 cm = 10 mm → ${c} cm = ${c*10} mm`}}
+    if(t===3){const w=R(3,15),h=R(2,10);return{q:`¿Cuál es el <b>perímetro</b> de este rectángulo (en cm)?`,html:`<div class="rect" style="margin-right:70px;margin-top:34px"><div class="box" style="width:${80+w*10}px;height:${40+h*8}px"></div><div class="w">${w} cm</div><div class="h">${h} cm</div></div>`,a:2*(w+h),explain:`El perímetro es la suma de todos los lados: ${w} + ${h} + ${w} + ${h} = ${2*(w+h)} cm`}}
+    const l=R(3,25);return{q:`Un cuadrado mide <b>${l} cm</b> de lado. ¿Cuál es su <b>perímetro</b>?`,a:4*l,explain:`Tiene 4 lados iguales: ${l} × 4 = ${4*l} cm`}},
+  pesoCap(){const t=R(0,4);
+    if(t===0){const k=R(1,9);return{q:`¿Cuántos gramos son <b>${k} kg</b>?`,a:k*1000,explain:`1 kg = 1,000 g → ${f(k*1000)} g`}}
+    if(t===1){const l=R(1,5);return{q:`¿Cuántos mililitros son <b>${l} litro${l>1?'s':''}</b>?`,a:l*1000,explain:`1 L = 1,000 mL → ${f(l*1000)} mL`}}
+    if(t===2){const o=pick([['medio kilo','g',500],['un cuarto de kilo','g',250],['medio litro','mL',500],['un cuarto de litro','mL',250]]);return{q:`¿Cuántos ${o[1]==='g'?'gramos':'mililitros'} son <b>${o[0]}</b>?`,a:o[2],explain:`${o[1]==='g'?'1 kg = 1,000 g':'1 L = 1,000 mL'}; ${o[0]} = ${o[2]} ${o[1]}`}}
+    if(t===3){const n=R(2,6),g=R(2,5)*100;return{q:`Una bolsa de dulces pesa <b>${g} g</b>. ¿Cuántos gramos pesan ${n} bolsas?`,a:n*g,explain:`${g} × ${n} = ${f(n*g)} g`}}
+    const b=pick([250,500]),l=b===250?R(1,3):R(1,4);const n=l*1000/b;return{q:`¿Cuántos vasos de <b>${b} mL</b> se llenan con <b>${l} litro${l>1?'s':''}</b> de agua?`,a:n,explain:`${l} L = ${f(l*1000)} mL; ${f(l*1000)} ÷ ${b} = ${n} vasos`}},
+  tiempo(){const t=R(0,4);
+    if(t===0){const h=R(1,5),m=pick([0,15,30,45,10,20]);return{q:`¿Cuántos minutos son <b>${h} hora${h>1?'s':''}${m?' y '+m+' minutos':''}</b>?`,a:h*60+m,explain:`1 hora = 60 minutos → ${h} × 60 = ${h*60}${m?` + ${m} = ${h*60+m}`:''} minutos`}}
+    if(t===1){const s=R(7,11),d=R(2,6);return{q:`Una película empieza a las <b>${s}:00</b> y dura <b>${d} horas</b>. ¿A qué hora termina? (solo la hora)`,a:s+d>12?s+d-12:s+d,explain:`${s} + ${d} = ${s+d}${s+d>12?` → en el reloj son las ${s+d-12}`:''}`}}
+    if(t===2){const w=R(2,6);return{q:`¿Cuántos días hay en <b>${w} semanas</b>?`,a:w*7,explain:`1 semana = 7 días → ${w} × 7 = ${w*7}`}}
+    if(t===3){const d=pick(['lunes','martes','miércoles','jueves','viernes','sábado','domingo']);const ds=['lunes','martes','miércoles','jueves','viernes','sábado','domingo'];const k=R(1,3);const i=ds.indexOf(d);
+      return{q:`Hoy es <b>${d}</b>. ¿Qué día será dentro de <b>${k} día${k>1?'s':''}</b>?`,a:ds[(i+k)%7],choices:shuffle(uniq([ds[(i+k)%7],ds[(i+k+1)%7],ds[(i+k+6)%7],ds[(i+k+2)%7]])),explain:`Cuenta ${k} día${k>1?'s':''} después del ${d}: ${ds[(i+k)%7]}`}}
+    const m=pick([90,120,75,150,180]);return{q:`¿Cuántas horas y minutos son <b>${m} minutos</b>? (escribe solo los <b>minutos que sobran</b> después de las horas completas)`,a:m%60,explain:`${m} = ${Math.floor(m/60)} hora${m>=120?'s':''} y ${m%60} minutos`}},
+  reloj(){const h=R(1,12),m=pick([0,5,10,15,20,25,30,35,40,45,50,55]);const a=hm(h,m);
+    const alt=uniq([a,hm(m/5||12,h*5%60),hm(h%12+1,m),hm(h,(m+30)%60),hm(h===1?12:h-1,m)]).filter(x=>x!==a);
+    return{q:'¿Qué hora marca el reloj?',html:clock(h,m),a,choices:shuffle([a,...alt.slice(0,3)]),explain:`La manecilla corta (roja) marca la hora: ${h}. La larga marca los minutos: ${m} (cada número vale 5 minutos).`}},
+};
+// custom fix for problema2 t===1 (change)
+const _p2=G.problema2;G.problema2=()=>{const r=_p2();if(!r._custom)return r;const a=R(12,30)*5,b=R(8,25)*5;const nm=pick(names);
+  return{q:`${nm} compra una playera de $${a} y un short de $${b}. Paga con un billete de $500. ¿Cuánto le dan de cambio?`,a:500-a-b,unit:'$',explain:`Primero suma: ${a} + ${b} = ${a+b}. Luego resta: 500 − ${a+b} = $${500-a-b}`}};
+
+const SECTIONS=[
+ {t:'🔢 Números hasta el 9,999',items:[
+  {id:'valor',ico:'🏗️',t:'Valor posicional',s:'Millares, centenas…',c:'--c4',gen:G.valor},
+  {id:'series',ico:'🪜',t:'Series',s:'¿Qué número falta?',c:'--c2',gen:G.series},
+  {id:'anterior',ico:'↔️',t:'Anterior y posterior',s:'Números grandes',c:'--c7',gen:G.anterior},
+  {id:'comparar',ico:'🐊',t:'Comparar',s:'Mayor, menor o igual',c:'--c8',gen:G.comparar},
+  {id:'redondeo',ico:'🎯',t:'Redondeo',s:'A decenas y centenas',c:'--c5',gen:G.redondeo},
+ ]},
+ {t:'➕ Sumas y ➖ restas',items:[
+  {id:'suma3',ico:'➕',t:'Sumas de 3 cifras',s:'Llevando',c:'--c1',gen:G.suma3},
+  {id:'suma4',ico:'🔥',t:'Sumas de 4 cifras',s:'Hasta 9,999',c:'--c6',gen:G.suma4},
+  {id:'sumaTres',ico:'3️⃣',t:'Suma de 3 números',s:'Uno debajo del otro',c:'--c3',gen:G.sumaTres},
+  {id:'resta3',ico:'➖',t:'Restas de 3 cifras',s:'Pidiendo prestado',c:'--c2',gen:G.resta3},
+  {id:'resta4',ico:'🏔️',t:'Restas de 4 cifras',s:'Números grandes',c:'--c7',gen:G.resta4},
+  {id:'restaCeros',ico:'0️⃣',t:'Restas con ceros',s:'¡Las más tramposas!',c:'--c5',gen:G.restaCeros},
+  {id:'falta',ico:'🔍',t:'El número que falta',s:'Suma y resta',c:'--c8',gen:G.falta},
+  {id:'mental',ico:'🧠',t:'Cálculo mental',s:'Rápido y sin papel',c:'--c4',gen:G.mental},
+ ]},
+ {t:'✖️ Multiplicación',items:[
+  ...[2,3,4,5,6,7,8,9,10].map((t,i)=>({id:'t'+t,ico:['🐣','🐸','🦊','🐼','🦁','🐙','🐬','🦄','🚀'][i],t:'Tabla del '+t,s:'Del 1 al 10',c:['--c1','--c2','--c3','--c4','--c5','--c6','--c7','--c8','--c1'][i],gen:G.tabla(t)})),
+  {id:'x10',ico:'🔟',t:'Por 10, 100 y 1,000',s:'Agregar ceros',c:'--c3',gen:G.x10},
+  {id:'mult2',ico:'✖️',t:'Multiplicaciones',s:'2 cifras, llevando',c:'--c6',gen:G.mult2},
+  {id:'mult3',ico:'💪',t:'Multiplicaciones grandes',s:'3 cifras × 1',c:'--c4',gen:G.mult3},
+ ]},
+ {t:'➗ División y fracciones',items:[
+  {id:'division',ico:'➗',t:'Divisiones',s:'Con las tablas',c:'--c2',gen:G.division},
+  {id:'residuo',ico:'🍰',t:'Reparto con sobrante',s:'Cociente y residuo',c:'--c1',gen:G.residuo},
+  {id:'doble',ico:'⚖️',t:'Doble, triple, mitad',s:'Y cuarta parte',c:'--c7',gen:G.dobleMitad},
+  {id:'fracPint',ico:'🍕',t:'¿Qué fracción es?',s:'Pizzas y barras',c:'--c6',gen:G.fracPintada},
+  {id:'fracDe',ico:'🧁',t:'Fracción de un número',s:'1/2 de 20…',c:'--c3',gen:G.fracDe},
+  {id:'fracComp',ico:'⚖️',t:'Comparar fracciones',s:'¿Cuál es mayor?',c:'--c5',gen:G.fracComp},
+ ]},
+ {t:'📖 Problemas',items:[
+  {id:'probSR',ico:'📖',t:'Problemas de suma y resta',s:'Números grandes',c:'--c5',gen:G.problemaSR},
+  {id:'probMD',ico:'📦',t:'Problemas de × y ÷',s:'Cajas, equipos…',c:'--c1',gen:G.problemaMD},
+  {id:'prob2',ico:'🧩',t:'Problemas de 2 pasos',s:'Dos operaciones',c:'--c4',gen:G.problema2},
+  {id:'dinero',ico:'💰',t:'Dinero',s:'Pesos y cambio',c:'--c3',gen:G.dinero},
+ ]},
+ {t:'📏 Medidas y tiempo',items:[
+  {id:'longitud',ico:'📏',t:'Longitud y perímetro',s:'km, m, cm, mm',c:'--c8',gen:G.longitud},
+  {id:'pesoCap',ico:'🧃',t:'Peso y capacidad',s:'kg, g, L, mL',c:'--c7',gen:G.pesoCap},
+  {id:'tiempo',ico:'📅',t:'El tiempo',s:'Horas, minutos, días',c:'--c6',gen:G.tiempo},
+  {id:'reloj',ico:'🕒',t:'El reloj',s:'¿Qué hora es?',c:'--c2',gen:G.reloj},
+ ]},
+ {t:'🏆 Reto',items:[
+  {id:'reto',ico:'🏆',t:'Reto final',s:'De todo un poco',c:'--c1',gen:null},
+ ]},
+];
+const ALL=SECTIONS.flatMap(s=>s.items).filter(i=>i.gen);
+SECTIONS[SECTIONS.length-1].items[0].gen=()=>{const it=pick(ALL);const q=it.gen();q._topic=it.t;return q};
+const FLASH={id:'flash',t:'Tablas relámpago ⚡',gen:G.tabla('mix'),timed:true};
+
+/* ---------- storage ---------- */
+let best={},flashSecs=3;
+try{best=JSON.parse(localStorage.getItem('mate3_best')||'{}');flashSecs=Number(localStorage.getItem('mate3_secs'))||3}catch(e){}
+const save=()=>{try{localStorage.setItem('mate3_best',JSON.stringify(best));localStorage.setItem('mate3_secs',flashSecs)}catch(e){}};
+
+/* ---------- UI ---------- */
+const $=id=>document.getElementById(id);
+function renderMenu(){
+  let total=0;Object.values(best).forEach(v=>total+=v);$('totalStars').textContent='⭐ '+total;
+  document.querySelectorAll('.chip').forEach(c=>c.classList.toggle('on',Number(c.dataset.s)===flashSecs));
+  const fb=best['flash'+flashSecs]||0;$('flashBest').textContent=fb?'⭐'.repeat(fb)+'☆'.repeat(3-fb):'☆☆☆';
+  $('sections').innerHTML=SECTIONS.map(s=>`<div class="section-t">${s.t}</div><div class="grid">${s.items.map(it=>{
+    const b=best[it.id]||0;return `<button class="tile" style="background:var(${it.c})" data-id="${it.id}"><div class="ico">${it.ico}</div><div><div class="t">${it.t}</div><div class="s">${it.s}</div><div class="best">${b?'⭐'.repeat(b)+'☆'.repeat(3-b):'☆☆☆'}</div></div></button>`}).join('')}</div>`).join('');
+  document.querySelectorAll('.tile').forEach(b=>b.onclick=()=>start(b.dataset.id));
+}
+document.querySelectorAll('.chip').forEach(c=>c.onclick=()=>{flashSecs=Number(c.dataset.s);save();renderMenu()});
+$('flashGo').onclick=()=>start('flash');
+
+let cur,qs,idx,score,input,answered,firstTry,timerId=null,tEnd=0,autoNext=null;
+function show(id){['menu','practice','result'].forEach(x=>$(x).classList.toggle('hide',x!==id));window.scrollTo(0,0)}
+function stopTimer(){if(timerId){cancelAnimationFrame(timerId);timerId=null}}
+function clearAll(){stopTimer();if(autoNext){clearTimeout(autoNext);autoNext=null}}
+function start(id){clearAll();cur=id==='flash'?FLASH:SECTIONS.flatMap(s=>s.items).find(i=>i.id===id);idx=0;score=0;qs=[];
+  const seen=new Set();let g=0;while(qs.length<10&&g<300){g++;const q=cur.gen();const k=q.q+(q.html||'');if(seen.has(k))continue;seen.add(k);qs.push(q)}
+  show('practice');renderQ()}
+function renderQ(){
+  clearAll();const q=qs[idx];answered=false;firstTry=true;input='';
+  $('count').textContent=(idx+1)+'/10';$('barFill').style.width=(idx*10)+'%';
+  $('qTopic').textContent=q._topic||cur.t;
+  $('qBody').innerHTML=`<div class="q">${q.q}</div>${q.html||''}`;
+  $('fb').textContent='';$('fb').className='fb';$('explain').style.display='none';$('nextBtn').style.display='none';
+  if(q.choices){
+    $('answerWrap').innerHTML=`<div class="choices">${q.choices.map(c=>`<button data-v="${c}">${c}</button>`).join('')}</div>`;
+    $('answerWrap').querySelectorAll('button').forEach(b=>b.onclick=()=>checkChoice(b));
+  }else{
+    $('answerWrap').innerHTML=`<div class="answer" id="ans">${q.unit||''}&nbsp;</div><div class="pad">${[1,2,3,4,5,6,7,8,9].map(n=>`<button data-k="${n}">${n}</button>`).join('')}<button class="del" data-k="del">⌫</button><button data-k="0">0</button><button class="go" data-k="ok">✓</button></div>`;
+    $('answerWrap').querySelectorAll('.pad button').forEach(b=>b.addEventListener('pointerdown',e=>{e.preventDefault();key(b.dataset.k)}));
+  }
+  if(cur.timed){$('timer').style.display='block';$('timer').classList.remove('low');tEnd=performance.now()+flashSecs*1000;tick()}else $('timer').style.display='none';
+}
+function tick(){const left=Math.max(0,tEnd-performance.now());$('tbar').style.width=(left/(flashSecs*1000)*100)+'%';
+  $('tn').textContent=Math.ceil(left/1000)||0;$('timer').classList.toggle('low',left<1000);
+  if(left<=0){timeUp();return}timerId=requestAnimationFrame(tick)}
+function timeUp(){stopTimer();if(answered)return;answered=true;const q=qs[idx];
+  $('fb').textContent='⏰ ¡Se acabó el tiempo! Era '+q.a;$('fb').className='fb bad';beep(false);
+  if($('ans')){$('ans').innerHTML=q.a;$('ans').classList.add('bad')}
+  autoNext=setTimeout(nextQ,1600)}
+function upd(){const q=qs[idx];$('ans').innerHTML=(q.unit||'')+(input||'&nbsp;')}
+function key(k){if(answered)return;const a=$('ans');a.classList.remove('bad','ok');
+  if(k==='del'){input=input.slice(0,-1)}else if(k==='ok'){checkNum();return}else if(input.length<5){input+=k}upd();
+  if(cur.timed&&input.length===String(qs[idx].a).length)checkNum()}
+function checkNum(){if(!input)return;const q=qs[idx];
+  if(Number(input)===q.a){correct();$('ans').classList.add('ok')}
+  else{$('ans').classList.remove('bad');void $('ans').offsetWidth;$('ans').classList.add('bad');wrong()}}
+function checkChoice(b){if(answered)return;const q=qs[idx];
+  if(b.dataset.v===String(q.a)){b.classList.add('ok');correct()}else{b.classList.add('bad');b.disabled=true;wrong()}}
+const cheers=['¡Excelente! 🎉','¡Muy bien! ⭐','¡Genial! 🙌','¡Eres una crack! 💪','¡Perfecto! 🌟','¡Así se hace! 🚀'];
+function correct(){answered=true;stopTimer();if(firstTry)score++;
+  $('fb').textContent=firstTry?pick(cheers):'¡Ahora sí! 👍';$('fb').className='fb ok';beep(true);
+  if(cur.timed){autoNext=setTimeout(nextQ,650);return}
+  if(!firstTry){$('explain').innerHTML='💡 '+qs[idx].explain;$('explain').style.display='block'}
+  $('nextBtn').style.display='block'}
+function wrong(){const q=qs[idx];
+  if(cur.timed){answered=true;stopTimer();$('fb').textContent='Era '+q.a+' ('+q.explain+')';$('fb').className='fb bad';beep(false);autoNext=setTimeout(nextQ,1600);return}
+  if(firstTry){firstTry=false;$('fb').textContent='Casi… ¡inténtalo otra vez! 🤔';$('fb').className='fb bad';input='';setTimeout(()=>{if(!answered&&$('ans'))upd()},400);beep(false);return}
+  answered=true;$('fb').textContent='La respuesta era: '+(q.unit||'')+q.a;$('fb').className='fb bad';
+  $('explain').innerHTML='💡 '+q.explain;$('explain').style.display='block';$('nextBtn').style.display='block';
+  document.querySelectorAll('.choices button').forEach(b=>{if(b.dataset.v===String(q.a))b.classList.add('ok')});beep(false)}
+function nextQ(){clearAll();idx++;if(idx<10)renderQ();else finish()}
+$('nextBtn').onclick=nextQ;
+function finish(){clearAll();$('barFill').style.width='100%';
+  const st=score>=10?3:score>=8?2:score>=5?1:0;const key=cur.id==='flash'?'flash'+flashSecs:cur.id;if(st>(best[key]||0)){best[key]=st;save()}
+  $('rEmoji').textContent=['💪','🙂','😄','🏆'][st];
+  $('rTitle').textContent=['¡Sigue practicando!','¡Bien hecho!','¡Muy bien!','¡Perfecto!'][st];
+  $('rStars').textContent='⭐'.repeat(st)+'☆'.repeat(3-st);
+  $('rScore').textContent=cur.timed?`Acertaste ${score} de 10 en ${flashSecs} segundos`:`Acertaste ${score} de 10 a la primera`;
+  show('result');if(st>=2)confetti()}
+$('againBtn').onclick=()=>start(cur.id);
+$('homeBtn').onclick=()=>{clearAll();renderMenu();show('menu')};
+$('backBtn').onclick=()=>{clearAll();renderMenu();show('menu')};
+let resetArmed=false;$('resetBtn').onclick=()=>{if(!resetArmed){resetArmed=true;$('resetBtn').textContent='¿Seguro? Toca otra vez para borrar';setTimeout(()=>{resetArmed=false;$('resetBtn').textContent='Borrar estrellas'},3000);return}best={};save();resetArmed=false;$('resetBtn').textContent='Borrar estrellas';renderMenu()};
+function confetti(){const c=$('confetti');const cols=['#FF6B6B','#4ECDC4','#FFB703','#6C63FF','#F15BB5','#8AC926'];
+  for(let i=0;i<70;i++){const e=document.createElement('i');e.style.left=Math.random()*100+'vw';e.style.background=pick(cols);e.style.animationDelay=Math.random()*.6+'s';e.style.animationDuration=(1.2+Math.random())+'s';c.appendChild(e)}
+  setTimeout(()=>c.innerHTML='',2800)}
+let ac;function beep(ok){try{ac=ac||new (window.AudioContext||window.webkitAudioContext)();const o=ac.createOscillator(),g=ac.createGain();o.connect(g);g.connect(ac.destination);
+  const t=ac.currentTime;o.type='sine';if(ok){o.frequency.setValueAtTime(660,t);o.frequency.setValueAtTime(880,t+.1)}else{o.frequency.setValueAtTime(260,t);o.frequency.setValueAtTime(200,t+.12)}
+  g.gain.setValueAtTime(.12,t);g.gain.exponentialRampToValueAtTime(.001,t+.3);o.start(t);o.stop(t+.3)}catch(e){}}
+document.addEventListener('keydown',e=>{if($('practice').classList.contains('hide'))return;
+  if(/^[0-9]$/.test(e.key))key(e.key);else if(e.key==='Backspace')key('del');else if(e.key==='Enter'){if(answered&&!cur.timed)$('nextBtn').click();else key('ok')}});
+renderMenu();
+try{if('serviceWorker' in navigator&&location.protocol==='https:'&&location.hostname.endsWith('github.io'))navigator.serviceWorker.register('sw.js')}catch(e){}
+</script>
+</body>
+</html>
